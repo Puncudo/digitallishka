@@ -1,0 +1,85 @@
+{
+  "candidate": {
+    "id": "031697151",
+    "name": "נתנאל בן ציון",
+    "email": "netanel.b.z@gmail.com",
+    "phone": "052-3690274",
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "29.05.09", "sub": "11:16:46" },
+      { "label": "זמן בתהליך",     "value": "16:46",    "sub": "29.05.09" },
+      { "label": "תשלום",          "value": "₪30,000",  "sub": null }
+    ],
+    "relatedPeople": [
+      { "id": 1, "name": "ישראלי ישראלי", "relation": "אב", "location": "תל אביב", "ageGroup": "אמצע", "unit": "טנד אחד", "status": "פעיל" },
+      { "id": 2, "name": "ישראלי ישראלי", "relation": "אם", "location": "ליהוד",   "ageGroup": "3 ש'",  "unit": "יחיד",    "status": "סגור" }
+    ],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "12.10.22", "status": "completed", "editable": true,  "alertText": null,      "icon": "trackRegister"  },
+      { "id": 2, "title": "צו 1",        "date": "12.10.22", "status": "alert",     "editable": false, "alertText": "לא הגיע", "icon": "trackOrder"     },
+      { "id": 3, "title": "יום הדמיה",   "date": "12.10.22", "status": "upcoming",  "editable": false, "alertText": null,      "icon": "trackScreen"    },
+      { "id": 4, "title": "שאלון גנדום", "date": "12.10.22", "status": "pending",   "editable": false, "alertText": null,      "icon": "trackForm"      },
+      { "id": 5, "title": "גיוס",        "date": "15.03.23", "status": "pending",   "editable": false, "alertText": null,      "icon": "trackDraft"     }
+    ],
+    "indications": [
+      { "id": 1, "label": "עולה חדש",    "date": "05.12.2025", "status": "active",  "statusLabel": "פעיל" },
+      { "id": 2, "label": "משפחה שכולה", "date": "05.12.2025", "status": "warning", "statusLabel": null   },
+      { "id": 3, "label": "תתקדמו",      "date": "05.12.2025", "status": "closed",  "statusLabel": "סגור" },
+      { "id": 4, "label": "ריסום גלידי", "date": "05.12.2025", "status": "closed",  "statusLabel": "סגור" },
+      { "id": 5, "label": "תחקורד",      "date": "05.12.2025", "status": "active",  "statusLabel": "פעיל" }
+    ],
+    "tasksTotal": 14,
+    "tasks": [
+      { "id": 1,  "title": "לסיור מחנה חינוך",    "date": "03.12.2025", "daysLeft": 3,    "type": "סיירת",  "status": "לא התייצב", "statusType": "purple"    },
+      { "id": 2,  "title": "לבדיקת גיוס ישיר",    "date": "03.12.2025", "daysLeft": 3,    "type": "סיירת",  "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 3,  "title": "לקצין שיוך",           "date": "03.12.2025", "daysLeft": 3,    "type": "סיירת",  "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 4,  "title": "לגיוס בית שמש",        "date": "03.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 5,  "title": "הנחיות לגיוס",         "date": "03.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בוטל",      "statusType": "cancelled" },
+      { "id": 6,  "title": "שאלון רפואי",          "date": "03.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 7,  "title": "ביקור ועדה",           "date": "05.12.2025", "daysLeft": 5,    "type": "ועדה",   "status": "לא התייצב", "statusType": "purple"    },
+      { "id": 8,  "title": "אישור מסמכים",         "date": "06.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 9,  "title": "ראיון קצין",           "date": "07.12.2025", "daysLeft": 7,    "type": "ראיון",  "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 10, "title": "בדיקת כושר",           "date": "08.12.2025", "daysLeft": null, "type": "בריאות", "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 11, "title": "מבחן פסיכוטכני",       "date": "09.12.2025", "daysLeft": 9,    "type": "מבחן",   "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 12, "title": "חתימת טפסים",          "date": "10.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 13, "title": "שאלון ביטחוני",        "date": "11.12.2025", "daysLeft": null, "type": "ביטחון", "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 14, "title": "אישור רפואי סופי",     "date": "12.12.2025", "daysLeft": null, "type": "בריאות", "status": "לא בוצע",   "statusType": "danger"    }
+    ],
+    "reportsTotal": 18,
+    "reportsOverdue": 12,
+    "reportsAlert": "דיווח לפני 16.5 על 16.5 ועבר",
+    "reports": [
+      { "id": 1,  "title": "ביקור בית",      "date": "03.12.2025", "daysLeft": 3,    "type": "סיירת",  "status": "לא התייצב", "statusType": "purple"    },
+      { "id": 2,  "title": "שיחת טלפון",     "date": "03.12.2025", "daysLeft": 3,    "type": "סיירת",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 3,  "title": "פגישה בלשכה",    "date": "03.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 4,  "title": "דיווח שטח",      "date": "03.12.2025", "daysLeft": null, "type": "סיירת",  "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 5,  "title": "ביקור נוסף",     "date": "03.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בוטל",      "statusType": "cancelled" },
+      { "id": 6,  "title": "שיחה עם ההורים", "date": "03.12.2025", "daysLeft": 48,   "type": "סיירת",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 7,  "title": "דיווח ועדה",     "date": "04.12.2025", "daysLeft": null, "type": "ועדה",   "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 8,  "title": "עדכון תיק",      "date": "04.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 9,  "title": "ריאיון ראשוני",  "date": "05.12.2025", "daysLeft": null, "type": "ראיון",  "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 10, "title": "בדיקה רפואית",   "date": "05.12.2025", "daysLeft": null, "type": "בריאות", "status": "בוצע",      "statusType": "success"   },
+      { "id": 11, "title": "אישור ביטחוני",  "date": "06.12.2025", "daysLeft": null, "type": "ביטחון", "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 12, "title": "פגישת מעקב",     "date": "06.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 13, "title": "דיווח סיום שלב", "date": "07.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 14, "title": "ביקור מנהל",     "date": "08.12.2025", "daysLeft": null, "type": "ניהול",   "status": "לא בוצע",   "statusType": "danger"    },
+      { "id": 15, "title": "עדכון הורים",    "date": "08.12.2025", "daysLeft": null, "type": "סיירת",  "status": "בוטל",      "statusType": "cancelled" },
+      { "id": 16, "title": "פגישת כיוון",    "date": "09.12.2025", "daysLeft": null, "type": "ייעוץ",   "status": "בתהליך",    "statusType": "warning"   },
+      { "id": 17, "title": "בדיקת מסמכים",   "date": "10.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success"   },
+      { "id": 18, "title": "סיום תהליך",     "date": "11.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "לא בוצע",   "statusType": "danger"    }
+    ],
+    "comment": "דוגמת תוכן דוחר פינות אמצע. קונסקטטור אדיפיסינג אלית, מה את צאלוחם ניס נו נכאת. דם אאקטקוס לא לאקסיו קאמ וי נישנת. קיראם את לקטוס ואם לאמו סטניבולמ סולייפ דאמוס גבריס."
+  },
+  "navItems": [
+    { "id": "candidates", "label": "מועמדים",      "route": "/candidates/031697151", "icon": "users"    },
+    { "id": "dashboard",  "label": "דשבורד",         "route": "/dashboard",            "icon": "grid"     },
+    { "id": "reports",    "label": "דיווחים",       "route": "/reports",              "icon": "file"     },
+    { "id": "issue",      "label": "דווח על בעיה", "route": "/issue",                "icon": "alert"    },
+    { "id": "settings",   "label": "הגדרות",        "route": "/settings",             "icon": "settings" }
+  ],
+  "bottomNav": [
+    { "id": "home",      "label": "ראשי",    "route": "/candidates/031697151", "icon": "home"   },
+    { "id": "search",    "label": "חיפוש",   "route": "/reports",              "icon": "search" },
+    { "id": "favorites", "label": "מועדפים", "route": "/issue",                "icon": "star"   },
+    { "id": "dashboard", "label": "דשבורד",  "route": "/dashboard",            "icon": "grid"   }
+  ]
+}

@@ -1,0 +1,51 @@
+/* ─── Design Tokens ─────────────────────────────────────── */
+:root {
+  --blue-dark:  #1e3a8a;
+  --blue-mid:   #2563eb;
+  --blue-light: #60a5fa;
+  --blue-soft:  #eff6ff;
+  --gradient:   linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+
+  --bg:          #f1f5f9;
+  --surface:     #ffffff;
+  --border:      #e2e8f0;
+  --border-soft: #f8fafc;
+
+  --text-primary:   #0f172a;
+  --text-secondary: #64748b;
+  --text-muted:     #94a3b8;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.05);
+
+  --sidebar-w:      220px;
+  --topbar-h:       58px;
+  --mobile-header-h: 58px;
+  --bottom-nav-h:   64px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #app {
+  height: 100%;
+  font-family: 'Heebo', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  direction: rtl;
+  text-align: right;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+a      { text-decoration: none; color: inherit; }
+ul     { list-style: none; }
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
