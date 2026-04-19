@@ -13,7 +13,6 @@ const CARD_W = 220
 const GAP    = 10
 
 function onScroll() {
-  // RTL: scrollLeft is 0 at start (right), goes negative in Chrome
   const pos = Math.abs(scrollEl.value.scrollLeft)
   currentIndex.value = Math.round(pos / (CARD_W + GAP))
 }
@@ -153,6 +152,7 @@ function next() { scrollTo(Math.min(props.track.length - 1, currentIndex.value +
   width: 220px;
   height: 88px;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   border-radius: 10px;
   border: 1px solid rgba(93, 135, 255, 0.1);
   box-shadow:
