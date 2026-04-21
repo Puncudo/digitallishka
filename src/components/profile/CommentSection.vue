@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import BaseDrawer from '../ui/BaseDrawer.vue'
 
 const props = defineProps({
   comment: { type: String, required: true },
@@ -40,38 +41,30 @@ function closeDrawer() {
     <p class="comment-text">{{ comment }}</p>
   </div>
 
-  <!-- Drawer overlay -->
-  <Teleport to="#app">
-    <Transition name="drawer">
-      <div v-if="drawerOpen" class="drawer-overlay" @click.self="closeDrawer">
-        <div class="drawer-panel">
-          <!-- Drawer handle -->
-          <div class="drawer-handle" />
-          <!-- Header -->
-          <div class="drawer-header">
-            <button class="drawer-close" @click="closeDrawer" aria-label="סגור">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <path d="M1 1L9 9M9 1L1 9" stroke="#5D87FF" stroke-width="2.4" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <span class="drawer-title">{{ candidateName }}</span>
-          </div>
-          <!-- Content -->
-          <div class="drawer-content">
-            <textarea
-              v-model="editText"
-              class="drawer-textarea"
-              dir="rtl"
-            />
-          </div>
-          <!-- Footer -->
-          <div class="drawer-footer">
-            <button class="drawer-save" @click="closeDrawer">שמירה</button>
-          </div>
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
+  <!-- Drawer -->
+  <BaseDrawer v-model="drawerOpen">
+    <!-- Header -->
+    <div class="drawer-header">
+      <span class="drawer-title">{{ candidateName }}</span>
+      <button class="drawer-close" @click="closeDrawer" aria-label="סגור">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M1 1L9 9M9 1L1 9" stroke="#5D87FF" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Content -->
+    <div class="drawer-content">
+      <textarea
+        v-model="editText"
+        class="drawer-textarea"
+        dir="rtl"
+      />
+    </div>
+    <!-- Footer -->
+    <div class="drawer-footer">
+      <button class="drawer-save" @click="closeDrawer">שמירה</button>
+    </div>
+  </BaseDrawer>
 </template>
 
 <style scoped>
@@ -122,38 +115,6 @@ function closeDrawer() {
 }
 
 /* ── Drawer ── */
-.drawer-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(93, 135, 255, 0.25);
-  backdrop-filter: blur(7px);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.drawer-panel {
-  position: relative;
-  width: 100%;
-  max-width: 440px;
-  background: #FFFFFF;
-  border-radius: 20px 20px 0 0;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0px -6px 24px rgba(0, 0, 0, 0.05);
-}
-
-.drawer-handle {
-  width: 60px;
-  height: 5px;
-  background: #FFFFFF;
-  border-radius: 100px;
-  margin: 0 auto;
-  position: relative;
-  top: -10px;
-}
-
 .drawer-header {
   display: flex;
   flex-direction: row;
@@ -163,6 +124,8 @@ function closeDrawer() {
   background: #FFFFFF;
   box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
   border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+  z-index: 1;
 }
 
 .drawer-title {
@@ -188,14 +151,17 @@ function closeDrawer() {
 
 .drawer-content {
   padding: 30px;
+  overflow-y: auto;
+  flex: 1;
+  background: #F5F5F7;
 }
 
 .drawer-textarea {
   width: 100%;
   min-height: 114px;
   padding: 12px 14px;
-  border: 1px solid #5D87FF;
-  border-radius: 2px;
+  border: 1px solid #D5D6DE;
+  border-radius: 8px;
   background: #FFFFFF;
   font-family: 'Noto Sans Hebrew', sans-serif;
   font-weight: 600;
@@ -203,7 +169,7 @@ function closeDrawer() {
   line-height: 22px;
   color: #2F305C;
   text-align: right;
-  resize: vertical;
+  resize: none;
   outline: none;
   box-sizing: border-box;
 }
@@ -212,6 +178,7 @@ function closeDrawer() {
   padding: 30px;
   background: #FFFFFF;
   box-shadow: 0px -6px 24px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
 }
 
 .drawer-save {
@@ -226,23 +193,5 @@ function closeDrawer() {
   line-height: 22px;
   color: #FFFFFF;
   cursor: pointer;
-}
-
-/* Transition */
-.drawer-enter-active,
-.drawer-leave-active {
-  transition: opacity 0.25s ease;
-}
-.drawer-enter-active .drawer-panel,
-.drawer-leave-active .drawer-panel {
-  transition: transform 0.3s ease;
-}
-.drawer-enter-from,
-.drawer-leave-to {
-  opacity: 0;
-}
-.drawer-enter-from .drawer-panel,
-.drawer-leave-to .drawer-panel {
-  transform: translateY(100%);
 }
 </style>

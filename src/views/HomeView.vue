@@ -2053,6 +2053,8 @@ const missionStudentCounts = computed(() => {
   background: #FFFFFF;
   box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
   border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+  z-index: 1;
 }
 
 .drawer-close {
@@ -2083,6 +2085,8 @@ const missionStudentCounts = computed(() => {
   padding: 30px;
   gap: 24px;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .form-field {
@@ -2187,6 +2191,7 @@ const missionStudentCounts = computed(() => {
   gap: 20px;
   background: #FFFFFF;
   box-shadow: 0px -6px 24px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
 }
 
 .save-btn {
