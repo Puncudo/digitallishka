@@ -2459,6 +2459,8 @@ const missionStudentCounts = computed(() => {
   background: #FFFFFF;
   box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
   border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+  z-index: 1;
 }
 
 .filter-title {
@@ -2560,6 +2562,7 @@ const missionStudentCounts = computed(() => {
   gap: 20px;
   background: #FFFFFF;
   box-shadow: 0px -6px 24px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
 }
 
 .filter-apply-btn {
