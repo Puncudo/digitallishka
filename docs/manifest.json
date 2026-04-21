@@ -1,0 +1,23 @@
+{
+  "name": "לשכת דיגיטליות",
+  "short_name": "דיגיטליות",
+  "description": "לשכת דיגיטליות",
+  "start_url": "/digitallishka/",
+  "scope": "/digitallishka/",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

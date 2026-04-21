@@ -2,6 +2,7 @@
 import AppSidebar   from './AppSidebar.vue'
 import MobileHeader from './MobileHeader.vue'
 import BottomNav    from './BottomNav.vue'
+import InstallPrompt from '../ui/InstallPrompt.vue'
 </script>
 
 <template>
@@ -31,6 +32,7 @@ import BottomNav    from './BottomNav.vue'
 
     <!-- mobile only -->
     <BottomNav />
+    <InstallPrompt />
   </div>
 </template>
 

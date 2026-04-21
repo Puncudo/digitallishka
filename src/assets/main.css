@@ -64,8 +64,40 @@ html, body {
   #app {
     width: 390px;
     height: 844px;
-    border-radius: 20px;
-    box-shadow: 0 0 60px rgba(0,0,0,.4);
+    border-radius: 44px;
+    border: 4px solid #1c1c1e;
+    box-shadow:
+      0 0 0 2px #3a3a3c,
+      0 0 60px rgba(0,0,0,.5);
+  }
+
+  /* Notch */
+  #app::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 30px;
+    background: #1c1c1e;
+    border-radius: 0 0 20px 20px;
+    z-index: 9999;
+  }
+
+  /* Camera dot */
+  #app::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(40px);
+    width: 12px;
+    height: 12px;
+    background: #0a0a0a;
+    border-radius: 50%;
+    border: 2px solid #1f1f22;
+    z-index: 10000;
   }
 }
 

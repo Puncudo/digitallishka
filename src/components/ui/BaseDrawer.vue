@@ -1,16 +1,21 @@
 <template>
   <Teleport to="#app">
-    <Transition name="bd" @after-enter="onAfterEnter" @before-leave="onBeforeLeave">
-      <div v-if="modelValue" class="bd-overlay" @click.self="close">
+    <Transition name="bd">
+      <div v-if="show" class="bd-overlay" @click.self="close">
         <div
           ref="sheetRef"
           class="bd-sheet"
           :style="sheetStyle"
-          @touchstart.passive="onTouchStart"
-          @touchmove="onTouchMove"
-          @touchend="onTouchEnd"
         >
-          <div class="bd-handle" />
+          <div
+            class="bd-drag-zone"
+            @touchstart.passive="onTouchStart"
+            @touchmove.prevent="onTouchMove"
+            @touchend="onTouchEnd"
+            @mousedown="onMouseDown"
+          >
+            <div class="bd-handle" />
+          </div>
           <slot />
         </div>
       </div>
@@ -27,16 +32,15 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const sheetRef = ref(null)
+const show = ref(false)
 
-// Snap points as fraction of container height (the #app or viewport)
 const SNAP_DEFAULT = 0.80
 const SNAP_FULL = 0.95
-const CLOSE_THRESHOLD = 0.3 // drag down 30% of sheet → close
+const CLOSE_THRESHOLD = 0.15
 
-const currentHeight = ref(0)  // in px
-const containerH = ref(844)
+const currentHeight = ref(0)
 const dragging = ref(false)
-const transitioning = ref(false)
+const closing = ref(false)
 
 let startY = 0
 let startH = 0
@@ -50,7 +54,7 @@ function getContainerHeight() {
 }
 
 const sheetStyle = computed(() => {
-  if (currentHeight.value <= 0) return {}
+  if (currentHeight.value <= 0) return { height: '0px' }
   return {
     height: currentHeight.value + 'px',
     transition: dragging.value ? 'none' : 'height 0.3s ease',
@@ -58,23 +62,23 @@ const sheetStyle = computed(() => {
 })
 
 function snapTo(fraction) {
-  containerH.value = getContainerHeight()
-  currentHeight.value = Math.round(containerH.value * fraction)
-}
-
-function onAfterEnter() {
-  snapTo(SNAP_DEFAULT)
-}
-
-function onBeforeLeave() {
-  currentHeight.value = 0
+  const ch = getContainerHeight()
+  currentHeight.value = Math.round(ch * fraction)
 }
 
 function close() {
-  emit('update:modelValue', false)
+  closing.value = true
+  dragging.value = false
+  currentHeight.value = 0
+  setTimeout(() => {
+    show.value = false
+    closing.value = false
+    emit('update:modelValue', false)
+  }, 200)
 }
 
 function onTouchStart(e) {
+  if (closing.value) return
   const touch = e.touches[0]
   startY = touch.clientY
   startH = currentHeight.value
@@ -85,59 +89,31 @@ function onTouchStart(e) {
 }
 
 function onTouchMove(e) {
-  // Only drag from the handle area or when scrolled to top
-  const sheet = sheetRef.value
-  if (!sheet) return
-
-  const scrollableChild = sheet.querySelector('.filter-body, .sd-body, .rep-body, .addr-body, .dates-body, [data-drawer-scroll]')
-  const scrollTop = scrollableChild ? scrollableChild.scrollTop : 0
-
+  if (!dragging.value || closing.value) return
   const touch = e.touches[0]
-  const deltaY = startY - touch.clientY  // positive = drag up, negative = drag down
+  const deltaY = startY - touch.clientY
   const now = Date.now()
   const dt = now - lastTime
   if (dt > 0) {
-    velocity = (lastY - touch.clientY) / dt  // px/ms, positive = up
+    velocity = (lastY - touch.clientY) / dt
   }
   lastY = touch.clientY
   lastTime = now
 
-  // If content is scrolled and user drags up, let native scroll handle it
-  if (scrollTop > 0 && deltaY > 0) return
-
-  // If content is at top and dragging down, prevent scroll and resize sheet
-  if (scrollTop <= 0 && deltaY < 0) {
-    e.preventDefault()
-  }
-  // If dragging from handle area (top 40px) always resize
-  const sheetRect = sheet.getBoundingClientRect()
-  const touchInHandle = touch.clientY < sheetRect.top + 40
-
-  if (touchInHandle || scrollTop <= 0) {
-    e.preventDefault()
-    const maxH = Math.round(getContainerHeight() * SNAP_FULL)
-    const newH = Math.max(100, Math.min(startH + deltaY, maxH))
-    currentHeight.value = newH
-  }
+  const maxH = Math.round(getContainerHeight() * SNAP_FULL)
+  const newH = Math.max(50, Math.min(startH + deltaY, maxH))
+  currentHeight.value = newH
 }
 
 function onTouchEnd() {
+  if (!dragging.value || closing.value) return
   dragging.value = false
   const ch = getContainerHeight()
   const fraction = currentHeight.value / ch
 
-  // Fast swipe down → close
-  if (velocity < -0.5) {
-    close()
-    return
-  }
-  // Fast swipe up → full
-  if (velocity > 0.5) {
-    snapTo(SNAP_FULL)
-    return
-  }
+  if (velocity < -0.5) { close(); return }
+  if (velocity > 0.5) { snapTo(SNAP_FULL); return }
 
-  // Position-based snapping
   if (fraction < CLOSE_THRESHOLD) {
     close()
   } else if (fraction > (SNAP_DEFAULT + SNAP_FULL) / 2) {
@@ -147,23 +123,57 @@ function onTouchEnd() {
   }
 }
 
-// Initial open
+// Mouse support for desktop testing
+function onMouseDown(e) {
+  if (closing.value) return
+  startY = e.clientY
+  startH = currentHeight.value
+  lastY = startY
+  velocity = 0
+  lastTime = Date.now()
+  dragging.value = true
+
+  const onMouseMove = (ev) => {
+    const deltaY = startY - ev.clientY
+    const now = Date.now()
+    const dt = now - lastTime
+    if (dt > 0) velocity = (lastY - ev.clientY) / dt
+    lastY = ev.clientY
+    lastTime = now
+    const maxH = Math.round(getContainerHeight() * SNAP_FULL)
+    currentHeight.value = Math.max(50, Math.min(startH + deltaY, maxH))
+  }
+
+  const onMouseUp = () => {
+    document.removeEventListener('mousemove', onMouseMove)
+    document.removeEventListener('mouseup', onMouseUp)
+    onTouchEnd()
+  }
+
+  document.addEventListener('mousemove', onMouseMove)
+  document.addEventListener('mouseup', onMouseUp)
+}
+
 watch(() => props.modelValue, (open) => {
   if (open) {
     document.body.style.overflow = 'hidden'
     document.body.style.touchAction = 'none'
+    show.value = true
     nextTick(() => {
-      containerH.value = getContainerHeight()
       currentHeight.value = 0
-      // Small delay so transition triggers from 0 → 80%
       requestAnimationFrame(() => snapTo(SNAP_DEFAULT))
     })
-  } else {
-    document.body.style.overflow = ''
-    document.body.style.touchAction = ''
-    currentHeight.value = 0
+  } else if (!closing.value) {
+    close()
   }
 }, { immediate: true })
+
+watch(show, (val) => {
+  if (!val) {
+    document.body.style.overflow = ''
+    document.body.style.touchAction = ''
+  }
+})
 </script>
 
 <style scoped>
@@ -190,31 +200,39 @@ watch(() => props.modelValue, (open) => {
   flex-direction: column;
   overflow: hidden;
   will-change: height;
+}
+
+.bd-drag-zone {
+  min-height: 28px;
+  cursor: grab;
   touch-action: none;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 6px;
+}
+
+.bd-drag-zone:active {
+  cursor: grabbing;
 }
 
 .bd-handle {
-  width: 60px;
-  height: 5px;
-  background: #FFFFFF;
+  width: 40px;
+  height: 4px;
+  background: #D5D6DE;
   border-radius: 100px;
-  margin: 0 auto;
-  position: absolute;
-  top: -14px;
-  left: calc(50% - 30px);
 }
 
-/* Transition */
-.bd-enter-active,
-.bd-leave-active {
+/* Transition — overlay fades, sheet slides */
+.bd-enter-active {
   transition: opacity 0.25s ease;
 }
-
-.bd-enter-from {
-  opacity: 0;
-  pointer-events: none;
+.bd-leave-active {
+  transition: opacity 0.15s ease;
 }
 
+.bd-enter-from,
 .bd-leave-to {
   opacity: 0;
 }

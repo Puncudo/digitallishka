@@ -1143,7 +1143,7 @@ const missionStudentCounts = computed(() => {
   padding: 0 20px;
   gap: 8px;
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
   overflow-x: auto;
@@ -2973,7 +2973,7 @@ const missionStudentCounts = computed(() => {
   align-items: center;
   padding: 20px;
   gap: 16px;
-  width: 90vw;
+  width: 100%;
   box-sizing: border-box;
   background: #FFFFFF;
   box-shadow: 0px 3px 8px rgba(47, 48, 92, 0.07);
