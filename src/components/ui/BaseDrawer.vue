@@ -12,10 +12,22 @@
 </template>
 
 <script setup>
-defineProps({
+import { watch } from 'vue'
+
+const props = defineProps({
   modelValue: { type: Boolean, required: true }
 })
 defineEmits(['update:modelValue'])
+
+watch(() => props.modelValue, (open) => {
+  if (open) {
+    document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
+  } else {
+    document.body.style.overflow = ''
+    document.body.style.touchAction = ''
+  }
+}, { immediate: true })
 </script>
 
 <style scoped>
@@ -28,6 +40,8 @@ defineEmits(['update:modelValue'])
   backdrop-filter: blur(4px);
   display: flex;
   align-items: flex-end;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 .bd-sheet {
@@ -38,6 +52,8 @@ defineEmits(['update:modelValue'])
   direction: rtl;
   max-height: 90vh;
   overflow-y: auto;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 
 .bd-handle {
