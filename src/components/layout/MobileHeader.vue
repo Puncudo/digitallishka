@@ -22,13 +22,13 @@ const router = useRouter()
   position: sticky;
   top: 0;
   z-index: 100;
-  height: 104px;
+  height: calc(104px + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 20px 11px;
   background: linear-gradient(275.24deg, #5C6BF3 -1.99%, #4389F7 38.29%, #1FB5FB 88.96%, #00D9FF 99.75%);
   box-shadow: 0px 4px 34px rgba(0, 4, 57, 0.25);
   overflow: hidden;
   display: flex;
   align-items: flex-end;
-  padding: 0 20px 11px;
 }
 
 /* decorative circle (Ellipse 1995 from Figma) */
