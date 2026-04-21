@@ -74,8 +74,4 @@ const router = useRouter()
   letter-spacing: -0.02em;
   color: #FFFFFF;
 }
-
-@media (min-width: 768px) {
-  .mobile-header { display: none; }
-}
 </style>

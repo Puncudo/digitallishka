@@ -60,9 +60,4 @@ function isActive(item) {
 }
 .nav-item.router-link-exact-active,
 .nav-item.active { color: var(--blue-mid); }
-
-/* hidden on desktop */
-@media (min-width: 768px) {
-  .bottom-nav { display: none; }
-}
 </style>

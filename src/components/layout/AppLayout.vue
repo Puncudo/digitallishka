@@ -39,13 +39,14 @@ import BottomNav    from './BottomNav.vue'
 .app-layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 .app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow-y: auto;
 }
 .desktop-topbar { display: none; }
 .page-content {
@@ -54,55 +55,5 @@ import BottomNav    from './BottomNav.vue'
   flex-direction: column;
   overflow-y: auto;
   padding-bottom: var(--bottom-nav-h);
-}
-
-/* ── Desktop ── */
-@media (min-width: 768px) {
-  .app-layout {
-    flex-direction: row;
-    height: 100vh;
-    overflow: hidden;
-  }
-  .app-main {
-    flex: 1;
-    overflow: hidden;
-  }
-  .desktop-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--topbar-h);
-    padding: 0 28px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .topbar-search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 7px 12px;
-    font-size: 13px;
-    color: var(--text-muted);
-    width: 220px;
-    cursor: pointer;
-  }
-  .topbar-user {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: var(--gradient);
-    display: flex; align-items: center; justify-content: center;
-    color: #fff;
-    font-size: 13px; font-weight: 700;
-    cursor: pointer;
-  }
-  .page-content {
-    overflow-y: auto;
-    height: calc(100vh - var(--topbar-h));
-    padding-bottom: 40px;
-  }
 }
 </style>

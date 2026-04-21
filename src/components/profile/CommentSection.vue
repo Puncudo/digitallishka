@@ -41,7 +41,7 @@ function closeDrawer() {
   </div>
 
   <!-- Drawer overlay -->
-  <Teleport to="body">
+  <Teleport to="#app">
     <Transition name="drawer">
       <div v-if="drawerOpen" class="drawer-overlay" @click.self="closeDrawer">
         <div class="drawer-panel">
@@ -119,14 +119,6 @@ function closeDrawer() {
   color: rgba(47, 48, 92, 0.75);
   text-align: right;
   margin: 0;
-}
-
-/* Desktop */
-@media (min-width: 768px) {
-  .comment-wrap {
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-  }
 }
 
 /* ── Drawer ── */

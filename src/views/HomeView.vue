@@ -644,7 +644,7 @@ const missionStudentCounts = computed(() => {
                     <span class="mission-stat-gray">{{ mission.missing }} חסרים</span>
                   </div>
                   <div class="mission-pct">
-                    <span class="mission-pct-num">{{ mission.percent }}</span><span class="mission-pct-sign">%</span>
+                    <span class="mission-pct-sign">%</span><span class="mission-pct-num">{{ mission.percent }}</span>
                   </div>
                 </div>
                 <div class="mission-bar-row">
@@ -697,7 +697,7 @@ const missionStudentCounts = computed(() => {
                       <span class="sl-stat-gray">{{ student.missingMissions }} חסר</span>
                     </div>
                     <div class="sl-pct">
-                      <span class="sl-pct-num">{{ student.completionPct }}</span><span class="sl-pct-sign">%</span>
+                      <span class="sl-pct-sign">%</span><span class="sl-pct-num">{{ student.completionPct }}</span>
                     </div>
                   </div>
                   <div class="sl-bar-row">

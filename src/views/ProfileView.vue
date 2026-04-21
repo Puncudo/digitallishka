@@ -44,19 +44,6 @@ const candidate = mockData.candidates.find(c => c.id === route.params.id) || moc
 }
 
 .section-grid {
-  padding: 20px 20px;        /* only the inner sections need horizontal breathing room */
-}
-
-/* Desktop */
-@media (min-width: 768px) {
-  .profile-body { padding: 20px 28px 40px; gap: 16px; }
-
-  .section-grid {
-    padding: 0;           /* desktop: layout handled by grid */
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 16px;
-    align-items: start;
-  }
+  padding: 20px 20px;
 }
 </style>

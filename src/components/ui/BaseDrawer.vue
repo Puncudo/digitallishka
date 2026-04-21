@@ -1,5 +1,5 @@
 <template>
-  <Teleport to="body">
+  <Teleport to="#app">
     <Transition name="bd">
       <div v-if="modelValue" class="bd-overlay" @click.self="$emit('update:modelValue', false)">
         <div class="bd-sheet">

@@ -289,15 +289,4 @@ function clearSearch() {
   font-size: 16px;
   color: #999;
 }
-
-@media (min-width: 768px) {
-  .search-bar-wrapper {
-    max-width: 440px;
-    margin: 0 auto;
-  }
-  .search-results {
-    max-width: 440px;
-    margin: 0 auto;
-  }
-}
 </style>

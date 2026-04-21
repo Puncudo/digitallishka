@@ -39,60 +39,6 @@ function isActive(item) {
 
 <style scoped>
 .sidebar {
-  display: none; /* hidden on mobile */
-}
-
-@media (min-width: 768px) {
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    width: var(--sidebar-w);
-    flex-shrink: 0;
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    overflow-y: auto;
-  }
-  .sidebar__logo {
-    padding: 20px 18px 16px;
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--blue-dark);
-    border-bottom: 1px solid var(--border);
-    letter-spacing: -0.5px;
-  }
-  .sidebar__nav {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    transition: all .15s;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  .nav-item:hover { background: var(--bg); color: var(--text-primary); }
-  .nav-item.active,
-  .nav-item.router-link-active {
-    background: var(--blue-soft);
-    color: var(--blue-mid);
-    font-weight: 600;
-  }
-  .sidebar__bottom {
-    padding: 12px 10px;
-    border-top: 1px solid var(--border);
-  }
+  display: none;
 }
 </style>

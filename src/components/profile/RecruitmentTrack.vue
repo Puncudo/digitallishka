@@ -269,24 +269,4 @@ function next() { scrollTo(Math.min(props.track.length - 1, currentIndex.value +
   transition: background .2s, width .2s;
 }
 .tdot.active { background: #5D87FF; width: 16px; border-radius: 3px; }
-
-/* ── Desktop ── */
-@media (min-width: 768px) {
-  .carousel-arrow { display: flex; }
-  .track-dots     { display: none; }
-
-  .cards-scroll {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 12px;
-    padding: 6px 2px;
-  }
-
-  .step-card {
-    width: 180px;
-    flex-shrink: 0;
-  }
-
-  .card-title { font-size: 15px; }
-}
 </style>
