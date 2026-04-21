@@ -5,6 +5,9 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/digitallishka/' : '/',
   plugins: [vue()],
+  build: {
+    outDir: 'docs'
+  },
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) }
   }
