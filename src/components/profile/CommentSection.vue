@@ -1,16 +1,29 @@
 <script setup>
-import AppIcon from '@/components/ui/AppIcon.vue'
+import { ref } from 'vue'
 
-defineProps({
-  comment: { type: String, required: true }
+const props = defineProps({
+  comment: { type: String, required: true },
+  candidateName: { type: String, default: '' }
 })
+
+const drawerOpen = ref(false)
+const editText = ref('')
+
+function openDrawer() {
+  editText.value = props.comment
+  drawerOpen.value = true
+}
+
+function closeDrawer() {
+  drawerOpen.value = false
+}
 </script>
 
 <template>
   <div class="comment-wrap">
     <div class="comment-header">
       <span class="comment-title">הערות מדריך קהילה</span>
-      <button class="edit-btn" aria-label="ערוך">
+      <button class="edit-btn" aria-label="ערוך" @click="openDrawer">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M17.5 18.3333H2.5C2.15833 18.3333 1.875 18.05 1.875 17.7083C1.875 17.3667 2.15833 17.0833 2.5 17.0833H17.5C17.8417 17.0833 18.125 17.3667 18.125 17.7083C18.125 18.05 17.8417 18.3333 17.5 18.3333Z"
@@ -22,11 +35,43 @@ defineProps({
             d="M13.0084 9.60832C12.7668 9.49166 12.5334 9.37499 12.3084 9.24166C12.1251 9.13332 11.9501 9.01666 11.7751 8.89166C11.6334 8.79999 11.4668 8.66666 11.3084 8.53332C11.2918 8.52499 11.2334 8.47499 11.1668 8.40832C10.8918 8.17499 10.5834 7.87499 10.3084 7.54166C10.2834 7.52499 10.2418 7.46666 10.1834 7.39166C10.1001 7.29166 9.95844 7.12499 9.83344 6.93332C9.73344 6.80832 9.61677 6.62499 9.50844 6.44166C9.3751 6.21666 9.25844 5.99166 9.14177 5.75832C8.9888 5.43054 8.55859 5.33317 8.30282 5.58894L3.61677 10.275C3.50844 10.3833 3.40844 10.5917 3.38344 10.7333L2.93344 13.925C2.8501 14.4917 3.00844 15.025 3.35844 15.3833C3.65844 15.675 4.0751 15.8333 4.5251 15.8333C4.6251 15.8333 4.7251 15.825 4.8251 15.8083L8.0251 15.3583C8.1751 15.3333 8.38344 15.2333 8.48344 15.125L13.1772 10.4312C13.4279 10.1805 13.3337 9.74927 13.0084 9.60832Z"
             fill="#2F305C" />
         </svg>
-
       </button>
     </div>
     <p class="comment-text">{{ comment }}</p>
   </div>
+
+  <!-- Drawer overlay -->
+  <Teleport to="body">
+    <Transition name="drawer">
+      <div v-if="drawerOpen" class="drawer-overlay" @click.self="closeDrawer">
+        <div class="drawer-panel">
+          <!-- Drawer handle -->
+          <div class="drawer-handle" />
+          <!-- Header -->
+          <div class="drawer-header">
+            <button class="drawer-close" @click="closeDrawer" aria-label="סגור">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M1 1L9 9M9 1L1 9" stroke="#5D87FF" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <span class="drawer-title">{{ candidateName }}</span>
+          </div>
+          <!-- Content -->
+          <div class="drawer-content">
+            <textarea
+              v-model="editText"
+              class="drawer-textarea"
+              dir="rtl"
+            />
+          </div>
+          <!-- Footer -->
+          <div class="drawer-footer">
+            <button class="drawer-save" @click="closeDrawer">שמירה</button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <style scoped>
@@ -82,4 +127,130 @@ defineProps({
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
   }
-}</style>
+}
+
+/* ── Drawer ── */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(93, 135, 255, 0.25);
+  backdrop-filter: blur(7px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.drawer-panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #FFFFFF;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px -6px 24px rgba(0, 0, 0, 0.05);
+}
+
+.drawer-handle {
+  width: 60px;
+  height: 5px;
+  background: #FFFFFF;
+  border-radius: 100px;
+  margin: 0 auto;
+  position: relative;
+  top: -10px;
+}
+
+.drawer-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px 20px 20px;
+  background: #FFFFFF;
+  box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 20px 20px 0 0;
+}
+
+.drawer-title {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #5D87FF;
+  text-align: right;
+}
+
+.drawer-close {
+  width: 32px;
+  height: 32px;
+  background: #EFF3FF;
+  border-radius: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.drawer-content {
+  padding: 30px;
+}
+
+.drawer-textarea {
+  width: 100%;
+  min-height: 114px;
+  padding: 12px 14px;
+  border: 1px solid #5D87FF;
+  border-radius: 2px;
+  background: #FFFFFF;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #2F305C;
+  text-align: right;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.drawer-footer {
+  padding: 30px;
+  background: #FFFFFF;
+  box-shadow: 0px -6px 24px rgba(0, 0, 0, 0.05);
+}
+
+.drawer-save {
+  width: 100%;
+  height: 52px;
+  background: #5D87FF;
+  border-radius: 4px;
+  border: none;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+/* Transition */
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: opacity 0.25s ease;
+}
+.drawer-enter-active .drawer-panel,
+.drawer-leave-active .drawer-panel {
+  transition: transform 0.3s ease;
+}
+.drawer-enter-from,
+.drawer-leave-to {
+  opacity: 0;
+}
+.drawer-enter-from .drawer-panel,
+.drawer-leave-to .drawer-panel {
+  transform: translateY(100%);
+}
+</style>

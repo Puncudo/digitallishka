@@ -50,6 +50,8 @@ import BottomNav    from './BottomNav.vue'
 .desktop-topbar { display: none; }
 .page-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   padding-bottom: var(--bottom-nav-h);
 }

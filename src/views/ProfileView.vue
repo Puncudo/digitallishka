@@ -1,4 +1,5 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import mockData          from '@/data/mock.json'
 import ProfileHero       from '@/components/profile/ProfileHero.vue'
 import RecruitmentTrack  from '@/components/profile/RecruitmentTrack.vue'
@@ -6,7 +7,8 @@ import IndicationsSection from '@/components/profile/IndicationsSection.vue'
 import ContentTabs       from '@/components/profile/ContentTabs.vue'
 import CommentSection    from '@/components/profile/CommentSection.vue'
 
-const candidate = mockData.candidate
+const route = useRoute()
+const candidate = mockData.candidates.find(c => c.id === route.params.id) || mockData.candidates[0]
 </script>
 
 <template>
@@ -29,7 +31,7 @@ const candidate = mockData.candidate
         :reports-alert="candidate.reportsAlert"
       />
 
-      <CommentSection :comment="candidate.comment" />
+      <CommentSection :comment="candidate.comment" :candidate-name="candidate.name" />
     </div>
   </div>
 </template>

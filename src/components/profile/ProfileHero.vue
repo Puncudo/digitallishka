@@ -1,21 +1,21 @@
 <script setup>
-import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import { useAppStore } from '@/stores/useAppStore'
 import AppIcon from '@/components/ui/AppIcon.vue'
 
-defineProps({
+const props = defineProps({
   candidate: { type: Object, required: true }
 })
 
 const store = useAppStore()
-const { favorited } = storeToRefs(store)
+const favorited = computed(() => store.isFavorite(props.candidate.id))
 </script>
 
 <template>
   <!-- ── Mobile hero ── -->
   <div class="hero-mobile">
     <!-- Fav button — absolute, right side -->
-    <button class="fav-btn" :class="{ active: favorited }" aria-label="מועדף" @click="store.toggleFavorite()">
+    <button class="fav-btn" :class="{ active: favorited }" aria-label="מועדף" @click="store.toggleFavorite(candidate.id)">
       <AppIcon :name="favorited ? 'starFill' : 'star'" :size="15" />
     </button>
 
@@ -59,7 +59,7 @@ const { favorited } = storeToRefs(store)
         </div>
       </div>
       <button class="fav-btn fav-btn--desktop" :class="{ active: favorited }" aria-label="מועדף"
-        @click="store.toggleFavorite()">
+        @click="store.toggleFavorite(candidate.id)">
         <AppIcon :name="favorited ? 'starFill' : 'star'" :size="18" />
       </button>
     </div>

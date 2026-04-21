@@ -1,8 +1,18 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import AppIcon from '@/components/ui/AppIcon.vue'
 import mockData from '@/data/mock.json'
 
+const route = useRoute()
 const items = mockData.bottomNav
+
+function isActive(item) {
+  const path = route.path
+  if (item.id === 'search') {
+    return path === '/search' || path.startsWith('/candidates/')
+  }
+  return path === item.route
+}
 </script>
 
 <template>
@@ -12,6 +22,7 @@ const items = mockData.bottomNav
       :key="item.id"
       :to="item.route"
       class="nav-item"
+      :class="{ active: isActive(item) }"
     >
       <AppIcon :name="item.icon" :size="22" />
       <span>{{ item.label }}</span>
@@ -44,7 +55,8 @@ const items = mockData.bottomNav
   text-decoration: none;
   transition: color .15s;
 }
-.nav-item.router-link-exact-active { color: var(--blue-mid); }
+.nav-item.router-link-exact-active,
+.nav-item.active { color: var(--blue-mid); }
 
 /* hidden on desktop */
 @media (min-width: 768px) {
