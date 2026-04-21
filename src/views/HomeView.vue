@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import mockData from '@/data/mock.json'
+import BaseDrawer from '@/components/ui/BaseDrawer.vue'
 
 const admin = mockData.admin
 const schools = mockData.schools
@@ -191,6 +192,40 @@ function clearAllFilters() {
   }
 }
 
+// Student detail drawer
+const studentDrawerOpen = ref(false)
+const selectedStudent = ref(null)
+
+function openStudentDrawer(student) {
+  selectedStudent.value = student
+  studentDrawerOpen.value = true
+}
+
+function closeStudentDrawer() {
+  studentDrawerOpen.value = false
+  selectedStudent.value = null
+}
+
+const studentMissionRows = computed(() => {
+  if (!selectedStudent.value) return []
+  const missions = currentMissionData.value.missions || []
+  return missions.map(m => ({
+    id: m.id,
+    name: m.name,
+    status: selectedStudent.value.statuses?.[m.id] || 'לא בוצע'
+  }))
+})
+
+// Address drawer
+const addressDrawerOpen = ref(false)
+function openAddressDrawer() { addressDrawerOpen.value = true }
+function closeAddressDrawer() { addressDrawerOpen.value = false }
+
+// Dates drawer
+const datesDrawerOpen = ref(false)
+function openDatesDrawer() { datesDrawerOpen.value = true }
+function closeDatesDrawer() { datesDrawerOpen.value = false }
+
 const currentMissionData = computed(() => {
   if (isAll.value) {
     // Aggregate all schools
@@ -367,7 +402,7 @@ const missionStudentCounts = computed(() => {
               </svg>
               <span class="detail-value">{{ selectedSchool.address }}</span>
             </div>
-            <div class="detail-link">
+            <div class="detail-link" @click="openAddressDrawer">
               <span class="link-text">לכתובת</span>
             </div>
           </div>
@@ -383,7 +418,7 @@ const missionStudentCounts = computed(() => {
               </svg>
               <span class="detail-value-bold">{{ selectedSchool.tzvBtzvata.label }} - {{ selectedSchool.tzvBtzvata.date }}</span>
             </div>
-            <div class="detail-link">
+            <div class="detail-link" @click="openDatesDrawer">
               <span class="link-text">פרטים</span>
             </div>
           </div>
@@ -642,7 +677,7 @@ const missionStudentCounts = computed(() => {
           <!-- Student cards -->
           <div class="sl-cards">
             <div v-for="student in filteredStudentsList" :key="student.id" class="sl-card">
-              <div class="sl-card-arrow">
+              <div class="sl-card-arrow" @click="openStudentDrawer(student)">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M8 2L4 6L8 10" stroke="#5D87FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -679,11 +714,7 @@ const missionStudentCounts = computed(() => {
     </div>
 
     <!-- Edit / New Representative Drawer -->
-    <Teleport to="body">
-      <Transition name="drawer">
-        <div v-if="drawerOpen" class="drawer-overlay" @click.self="closeDrawer">
-          <div class="drawer-sheet">
-            <div class="drawer-handle" />
+    <BaseDrawer v-model="drawerOpen">
             <!-- Header -->
             <div class="drawer-header">
               <span class="drawer-title">פרטים מלאים</span>
@@ -743,17 +774,10 @@ const missionStudentCounts = computed(() => {
               </button>
               <button class="save-btn" @click="closeDrawer">שמירה</button>
             </div>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
+    </BaseDrawer>
 
     <!-- Filter Drawer -->
-    <Teleport to="body">
-      <Transition name="drawer">
-        <div v-if="filterDrawerOpen" class="filter-overlay" @click.self="closeFilterDrawer">
-          <div class="filter-sheet">
-            <div class="filter-handle" />
+    <BaseDrawer v-model="filterDrawerOpen">
             <!-- Header -->
             <div class="filter-header">
               <span class="filter-title">סינון</span>
@@ -900,10 +924,104 @@ const missionStudentCounts = computed(() => {
               <button class="filter-clear-btn" @click="clearAllFilters">ניקוי</button>
               <button class="filter-apply-btn" @click="closeFilterDrawer">הצגת תוצאות</button>
             </div>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
+    </BaseDrawer>
+
+    <!-- Student Detail Drawer -->
+    <BaseDrawer v-model="studentDrawerOpen">
+            <!-- Header -->
+            <div class="sd-header">
+              <button class="sd-close" @click="closeStudentDrawer">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M1 1L9 9M9 1L1 9" stroke="#5D87FF" stroke-width="2.4" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <div class="sd-header-info">
+                <span class="sd-header-name">{{ selectedStudent?.name }}</span>
+                <span class="sd-header-id">ת.ז {{ selectedStudent?.idNumber }}</span>
+              </div>
+            </div>
+            <!-- Body -->
+            <div class="sd-body">
+              <div class="sd-missions">
+                <div v-for="row in studentMissionRows" :key="row.id" class="sd-mission-row">
+                  <div class="sd-mission-name-row">
+                    <span class="sd-mission-name">{{ row.name }}</span>
+                  </div>
+                  <div
+                    class="sd-mission-badge"
+                    :class="{
+                      'status-done': row.status === 'בוצע',
+                      'status-not-done': row.status === 'לא בוצע',
+                      'status-in-progress': row.status === 'בתהליך'
+                    }"
+                  >{{ row.status }}</div>
+                </div>
+              </div>
+            </div>
+    </BaseDrawer>
+
+    <!-- Address Drawer -->
+    <BaseDrawer v-model="addressDrawerOpen">
+            <!-- Header -->
+            <div class="addr-header">
+              <button class="addr-close" @click="closeAddressDrawer">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M1 1L9 9M9 1L1 9" stroke="#5D87FF" stroke-width="2.4" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <span class="addr-title">{{ selectedSchool?.name }}</span>
+            </div>
+            <!-- Waze row -->
+            <div class="addr-row">
+              <span class="addr-row-label">פתח באמצעות Waze</span>
+              <div class="addr-icon-box addr-icon-waze">
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <path d="M12.5 2C7.25 2 3 6.25 3 11.5C3 16.75 7.25 21 12.5 21C17.75 21 22 16.75 22 11.5C22 6.25 17.75 2 12.5 2Z" fill="white"/>
+                  <circle cx="9.5" cy="10" r="1.5" fill="#333"/>
+                  <circle cx="15.5" cy="10" r="1.5" fill="#333"/>
+                  <path d="M8.5 14.5C9.5 16 11 17 12.5 17C14 17 15.5 16 16.5 14.5" stroke="#333" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Divider -->
+            <div class="addr-divider" />
+            <!-- Google Maps row -->
+            <div class="addr-row">
+              <span class="addr-row-label">פתח באמצעות Google maps</span>
+              <div class="addr-icon-box addr-icon-gmaps">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+                  <circle cx="12" cy="9" r="2.5" fill="white"/>
+                </svg>
+              </div>
+            </div>
+    </BaseDrawer>
+
+    <!-- Dates Drawer -->
+    <BaseDrawer v-model="datesDrawerOpen">
+            <!-- Header -->
+            <div class="addr-header">
+              <button class="addr-close" @click="closeDatesDrawer">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M1 1L9 9M9 1L1 9" stroke="#5D87FF" stroke-width="2.4" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <span class="addr-title">{{ selectedSchool?.name }}</span>
+            </div>
+            <!-- Date row 1 -->
+            <div class="dates-row">
+              <div class="dates-date">{{ selectedSchool?.tzvBtzvata?.date }}</div>
+              <div class="dates-badge">צו בצוותא הבא</div>
+              <div class="dates-label">צו אחוד - גברים</div>
+            </div>
+            <!-- Divider -->
+            <div class="addr-divider" />
+            <!-- Date row 2 -->
+            <div class="dates-row">
+              <div class="dates-date">{{ selectedSchool?.tzvBtzvata?.date }}</div>
+              <div class="dates-label">צו אחוד - בנות</div>
+            </div>
+    </BaseDrawer>
 
     <!-- Mission Detail Overlay -->
     <Transition name="slide">
@@ -1013,6 +1131,8 @@ const missionStudentCounts = computed(() => {
   background: linear-gradient(208.28deg, #5C6BF3 -1.76%, #4389F7 40.13%, #1FB5FB 88.46%, #00D9FF 104.03%), #FFFFFF;
   position: relative;
   min-width: 0;
+  overflow: hidden;
+  width: 100%;
 }
 
 /* School pills */
@@ -1023,13 +1143,17 @@ const missionStudentCounts = computed(() => {
   padding: 0 20px;
   gap: 8px;
   width: 100%;
+  max-width: 100vw;
+  min-width: 0;
   box-sizing: border-box;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   flex-wrap: nowrap;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  direction: rtl;
 }
 
 .school-pills::-webkit-scrollbar {
@@ -1920,37 +2044,6 @@ const missionStudentCounts = computed(() => {
 }
 
 /* Drawer */
-.drawer-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(93, 135, 255, 0.25);
-  backdrop-filter: blur(7px);
-  z-index: 1000;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.drawer-sheet {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 440px;
-  background: #FFFFFF;
-  border-radius: 20px 20px 0 0;
-  position: relative;
-  direction: rtl;
-}
-
-.drawer-handle {
-  width: 60px;
-  height: 5px;
-  border-radius: 5px;
-  border: 5px solid #FFFFFF;
-  background: #FFFFFF;
-  margin: -10px auto 0;
-}
-
 .drawer-header {
   display: flex;
   flex-direction: row;
@@ -2136,28 +2229,6 @@ const missionStudentCounts = computed(() => {
   font-size: 16px;
   line-height: 22px;
   color: #FF1D47;
-}
-
-/* Drawer transitions */
-.drawer-enter-active,
-.drawer-leave-active {
-  transition: opacity 0.25s ease;
-}
-.drawer-enter-active .drawer-sheet,
-.drawer-leave-active .drawer-sheet {
-  transition: transform 0.3s ease;
-}
-.drawer-enter-from {
-  opacity: 0;
-}
-.drawer-enter-from .drawer-sheet {
-  transform: translateY(100%);
-}
-.drawer-leave-to {
-  opacity: 0;
-}
-.drawer-leave-to .drawer-sheet {
-  transform: translateY(100%);
 }
 
 /* Student List */
@@ -2379,33 +2450,6 @@ const missionStudentCounts = computed(() => {
 }
 
 /* Filter Drawer */
-.filter-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 200;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.filter-sheet {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: 90vh;
-  background: #FFFFFF;
-  border-radius: 20px 20px 0 0;
-}
-
-.filter-handle {
-  width: 60px;
-  height: 5px;
-  background: #FFFFFF;
-  border-radius: 100px;
-  margin: -10px auto 0;
-}
-
 .filter-header {
   display: flex;
   flex-direction: row;
@@ -2545,6 +2589,261 @@ const missionStudentCounts = computed(() => {
   line-height: 22px;
   color: #5D87FF;
   cursor: pointer;
+}
+
+/* Student Detail Drawer */
+.sd-header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 20px 30px;
+  background: #FFFFFF;
+  box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 20px 20px 0 0;
+}
+
+.sd-close {
+  width: 32px;
+  height: 32px;
+  background: #EFF3FF;
+  border-radius: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sd-header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.sd-header-name {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #5D87FF;
+  text-align: left;
+}
+
+.sd-header-id {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #6D6E8D;
+  letter-spacing: -0.02em;
+}
+
+.sd-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px 30px;
+  gap: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sd-missions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  width: 100%;
+}
+
+.sd-mission-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 8px rgba(47, 48, 92, 0.07);
+  border-radius: 4px;
+}
+
+.sd-mission-badge {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 12px;
+  width: 74px;
+  height: 32px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sd-mission-badge.status-done {
+  background: rgba(46, 171, 80, 0.15);
+  color: #2EAB50;
+}
+
+.sd-mission-badge.status-not-done {
+  background: #FFDDE3;
+  color: #FF1D47;
+}
+
+.sd-mission-badge.status-in-progress {
+  background: rgba(0, 160, 230, 0.15);
+  color: #00A0E6;
+}
+
+.sd-mission-name-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.sd-mission-name {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: left;
+  color: #2F305C;
+}
+
+/* Address & Dates Drawers */
+.addr-header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 20px 30px;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 20px 20px 0 0;
+}
+
+.addr-close {
+  width: 32px;
+  height: 32px;
+  background: #EFF3FF;
+  border-radius: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.addr-title {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #5D87FF;
+  text-align: right;
+}
+
+.addr-row {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 30px;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.addr-row-label {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: right;
+  color: #2F305C;
+}
+
+.addr-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.addr-icon-waze {
+  background: linear-gradient(180deg, #47D1FF 0%, #0DC3FF 100%);
+}
+
+.addr-icon-gmaps {
+  background: #FFFFFF;
+  border: 1px solid #F0F1FC;
+}
+
+.addr-divider {
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #DEE1FD;
+}
+
+/* Dates drawer rows */
+.dates-row {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 30px;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dates-date {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #5D87FF;
+}
+
+.dates-badge {
+  padding: 3px 8px 4px;
+  background: #DEE1FD;
+  border-radius: 3px;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: right;
+  color: #5D87FF;
+}
+
+.dates-label {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: right;
+  color: #2F305C;
 }
 
 /* Mission Detail Overlay */
