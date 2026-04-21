@@ -75,13 +75,15 @@ function clearSearch() {
             @click="goToCandidate(item.id)"
           >
             <div class="result-info">
-              <svg v-if="store.isFavorite(item.id)" class="fav-star-icon" width="16" height="16" viewBox="0 0 24 24" fill="#FFD16A">
-                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005z" clip-rule="evenodd"/>
-              </svg>
-              <svg class="person-icon" width="14" height="17" viewBox="0 0 14 17" fill="none">
-                <path d="M7 8C9.21 8 11 6.21 11 4C11 1.79 9.21 0 7 0C4.79 0 3 1.79 3 4C3 6.21 4.79 8 7 8Z" fill="#2F305C"/>
-                <path d="M7 10C3.13 10 0 12.13 0 14.75V17H14V14.75C14 12.13 10.87 10 7 10Z" fill="#2F305C"/>
-              </svg>
+              <span class="icon-wrap">
+                <svg class="person-icon" width="14" height="17" viewBox="0 0 14 17" fill="none">
+                  <path d="M7 8C9.21 8 11 6.21 11 4C11 1.79 9.21 0 7 0C4.79 0 3 1.79 3 4C3 6.21 4.79 8 7 8Z" fill="#2F305C"/>
+                  <path d="M7 10C3.13 10 0 12.13 0 14.75V17H14V14.75C14 12.13 10.87 10 7 10Z" fill="#2F305C"/>
+                </svg>
+                <svg v-if="store.isFavorite(item.id)" class="fav-badge" width="10" height="10" viewBox="0 0 24 24" fill="#FFD16A">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005z" clip-rule="evenodd"/>
+                </svg>
+              </span>
               <span class="result-name">{{ item.name }}</span>
             </div>
             <span class="result-id">{{ item.id }}</span>
@@ -105,13 +107,15 @@ function clearSearch() {
             @click="goToCandidate(item.id)"
           >
             <div class="result-info">
-              <svg v-if="store.isFavorite(item.id)" class="fav-star-icon" width="16" height="16" viewBox="0 0 24 24" fill="#FFD16A">
-                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005z" clip-rule="evenodd"/>
-              </svg>
-              <svg class="person-icon" width="14" height="17" viewBox="0 0 14 17" fill="none">
-                <path d="M7 8C9.21 8 11 6.21 11 4C11 1.79 9.21 0 7 0C4.79 0 3 1.79 3 4C3 6.21 4.79 8 7 8Z" fill="#2F305C"/>
-                <path d="M7 10C3.13 10 0 12.13 0 14.75V17H14V14.75C14 12.13 10.87 10 7 10Z" fill="#2F305C"/>
-              </svg>
+              <span class="icon-wrap">
+                <svg class="person-icon" width="14" height="17" viewBox="0 0 14 17" fill="none">
+                  <path d="M7 8C9.21 8 11 6.21 11 4C11 1.79 9.21 0 7 0C4.79 0 3 1.79 3 4C3 6.21 4.79 8 7 8Z" fill="#2F305C"/>
+                  <path d="M7 10C3.13 10 0 12.13 0 14.75V17H14V14.75C14 12.13 10.87 10 7 10Z" fill="#2F305C"/>
+                </svg>
+                <svg v-if="store.isFavorite(item.id)" class="fav-badge" width="10" height="10" viewBox="0 0 24 24" fill="#FFD16A">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005z" clip-rule="evenodd"/>
+                </svg>
+              </span>
               <span class="result-name" :class="{ bold: item.bold }">{{ item.name }}</span>
             </div>
             <span class="result-id">{{ item.id }}</span>
@@ -228,7 +232,7 @@ function clearSearch() {
 .result-item {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   padding: 20px 0;
   border-bottom: 1px solid #F7F7F7;
@@ -248,12 +252,25 @@ function clearSearch() {
   gap: 10px;
 }
 
+.icon-wrap {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .person-icon {
   flex-shrink: 0;
 }
 
-.fav-star-icon {
-  flex-shrink: 0;
+.fav-badge {
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,.3));
 }
 
 .result-name {
@@ -270,12 +287,11 @@ function clearSearch() {
 }
 
 .result-id {
-  flex: 1;
   font-family: 'Noto Sans Hebrew', sans-serif;
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
-  text-align: right;
+  text-align: left;
   letter-spacing: -0.02em;
   color: #2F305C;
 }
