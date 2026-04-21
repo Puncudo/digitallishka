@@ -98,6 +98,49 @@ const displayUrgentTasks = computed(() => {
 const gradeTab = ref('all') // 'all', 'יא', 'יב'
 const statusTab = ref('missions') // 'missions' or 'students'
 const activeIndicators = ref(new Set())
+const studentSearch = ref('')
+
+// All students with their mission completion stats
+const allStudentsList = computed(() => {
+  let students
+  if (isAll.value) {
+    students = schools.flatMap(s =>
+      (s.missionData.missionStudents || []).map(st => {
+        const missions = s.missionData.missions
+        const total = missions.length
+        const completed = missions.filter(m => st.statuses[m.id] === 'בוצע').length
+        const missing = total - completed
+        const percent = total > 0 ? Math.round((completed / total) * 100) : 0
+        return { ...st, totalMissions: total, completedMissions: completed, missingMissions: missing, completionPct: percent }
+      })
+    )
+  } else {
+    const s = selectedSchool.value
+    const missions = s?.missionData?.missions || []
+    students = (s?.missionData?.missionStudents || []).map(st => {
+      const total = missions.length
+      const completed = missions.filter(m => st.statuses[m.id] === 'בוצע').length
+      const missing = total - completed
+      const percent = total > 0 ? Math.round((completed / total) * 100) : 0
+      return { ...st, totalMissions: total, completedMissions: completed, missingMissions: missing, completionPct: percent }
+    })
+  }
+  // Apply indicator filters
+  if (activeIndicators.value.size > 0) {
+    students = students.filter(st =>
+      [...activeIndicators.value].every(f => (st.indicators || []).includes(f))
+    )
+  }
+  return students
+})
+
+const filteredStudentsList = computed(() => {
+  if (!studentSearch.value) return allStudentsList.value
+  const q = studentSearch.value.trim()
+  return allStudentsList.value.filter(s =>
+    s.name.includes(q) || s.idNumber.includes(q)
+  )
+})
 
 // Filter drawer
 const filterDrawerOpen = ref(false)
@@ -435,12 +478,6 @@ const missionStudentCounts = computed(() => {
       <div class="missions-section">
         <!-- Grade tabs -->
         <div class="grade-tabs">
-          <button class="filter-icon-btn" @click="openFilterDrawer">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 4h12M4 8h8M6 12h4" stroke="#5D87FF" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            <div v-if="hasActiveFilters" class="filter-red-dot" />
-          </button>
           <div class="grade-tabs-row">
             <div
               class="grade-tab"
@@ -467,6 +504,12 @@ const missionStudentCounts = computed(() => {
               <div v-if="gradeTab === 'יב'" class="grade-tab-line" />
             </div>
           </div>
+          <button class="filter-icon-btn" @click="openFilterDrawer">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4h12M4 8h8M6 12h4" stroke="#5D87FF" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <div v-if="hasActiveFilters" class="filter-red-dot" />
+          </button>
         </div>
 
         <!-- Indicator pills -->
@@ -580,8 +623,56 @@ const missionStudentCounts = computed(() => {
         </template>
 
         <template v-else>
-          <div class="students-placeholder">
-            <span>רשימת תלמידים - בקרוב</span>
+          <!-- Search bar -->
+          <div class="sl-search-wrap">
+            <div class="sl-search">
+              <input
+                v-model="studentSearch"
+                type="text"
+                class="sl-search-input"
+                placeholder="חיפוש"
+              />
+              <svg class="sl-search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="9" cy="9" r="6" stroke="#2F305C" stroke-width="1.5" fill="none"/>
+                <path d="M14 14L18 18" stroke="#2F305C" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Student cards -->
+          <div class="sl-cards">
+            <div v-for="student in filteredStudentsList" :key="student.id" class="sl-card">
+              <div class="sl-card-arrow">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M8 2L4 6L8 10" stroke="#5D87FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="sl-card-content">
+                <div class="sl-card-top">
+                  <div class="sl-name-row">
+                    <span class="sl-name">{{ student.name }}</span>
+                    <span class="sl-separator">|</span>
+                    <span class="sl-id">ת.ז {{ student.idNumber }}</span>
+                  </div>
+                </div>
+                <div class="sl-card-bottom">
+                  <div class="sl-stats-row">
+                    <div class="sl-stats-text">
+                      <span class="sl-stat-dark">{{ student.completedMissions }}/{{ student.totalMissions }} הושלמו</span>
+                      <span class="sl-stat-gray">{{ student.missingMissions }} חסר</span>
+                    </div>
+                    <div class="sl-pct">
+                      <span class="sl-pct-num">{{ student.completionPct }}</span><span class="sl-pct-sign">%</span>
+                    </div>
+                  </div>
+                  <div class="sl-bar-row">
+                    <div class="sl-bar-track">
+                      <div class="sl-bar-fill" :style="{ width: student.completionPct + '%' }" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -1339,7 +1430,7 @@ const missionStudentCounts = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 16px 16px 16px 0;
+  padding: 16px;
   gap: 8px;
   flex: 1;
 }
@@ -1397,6 +1488,7 @@ const missionStudentCounts = computed(() => {
   font-size: 14px;
   line-height: 19px;
   color: #6D6E8D;
+  align-self: flex-end;
 }
 
 .urgent-bar {
@@ -2068,6 +2160,224 @@ const missionStudentCounts = computed(() => {
   transform: translateY(100%);
 }
 
+/* Student List */
+.sl-search-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 30px;
+  gap: 4px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.sl-search {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 12px 0 14px;
+  gap: 10px;
+  width: 100%;
+  height: 42px;
+  background: #FAFBFF;
+  border: 1px solid #EFF3FF;
+  border-radius: 2px;
+}
+
+.sl-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #2F305C;
+  text-align: right;
+  outline: none;
+}
+
+.sl-search-input::placeholder {
+  color: #ACACBE;
+}
+
+.sl-search-icon {
+  flex-shrink: 0;
+}
+
+.sl-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 30px;
+  gap: 15px;
+}
+
+.sl-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  padding: 20px 20px 20px 0;
+  gap: 10px;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #EFF3FF;
+  box-shadow: 0px 3px 8px rgba(47, 48, 92, 0.07);
+  border-radius: 5px;
+}
+
+.sl-card-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  align-self: stretch;
+  flex: 1;
+  min-height: 65px;
+  cursor: pointer;
+}
+
+.sl-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  width: calc(100% - 60px);
+}
+
+.sl-card-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.sl-name-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.sl-name {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: right;
+  text-decoration-line: underline;
+  color: #2F305C;
+}
+
+.sl-separator {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ACACBE;
+}
+
+.sl-id {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #6D6E8D;
+}
+
+.sl-card-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.sl-stats-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.sl-pct {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.sl-pct-num {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #2F305C;
+}
+
+.sl-pct-sign {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 14px;
+  color: #2F305C;
+}
+
+.sl-stats-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.sl-stat-dark {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #2F305C;
+}
+
+.sl-stat-gray {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #6D6E8D;
+}
+
+.sl-bar-row {
+  width: 100%;
+}
+
+.sl-bar-track {
+  width: 100%;
+  height: 8px;
+  background: #EFF3FF;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sl-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 8px;
+  background: #5D87FF;
+  border-radius: 100px;
+}
+
 /* Filter Drawer */
 .filter-overlay {
   position: fixed;
@@ -2098,7 +2408,7 @@ const missionStudentCounts = computed(() => {
 
 .filter-header {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px 20px 20px;
@@ -2141,7 +2451,7 @@ const missionStudentCounts = computed(() => {
 .filter-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
 }
 
@@ -2151,7 +2461,7 @@ const missionStudentCounts = computed(() => {
   font-size: 15px;
   line-height: 16px;
   color: #2F305C;
-  text-align: right;
+  text-align: left;
 }
 
 .filter-section-title {
@@ -2160,14 +2470,14 @@ const missionStudentCounts = computed(() => {
   font-size: 16px;
   line-height: 22px;
   color: #2F305C;
-  text-align: right;
+  text-align: left;
 }
 
 .filter-section-pills {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -2200,8 +2510,8 @@ const missionStudentCounts = computed(() => {
 
 .filter-footer {
   display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: flex-end;
   padding: 30px;
   gap: 20px;
   background: #FFFFFF;
