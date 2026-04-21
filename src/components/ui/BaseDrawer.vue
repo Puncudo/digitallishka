@@ -24,6 +24,7 @@ defineEmits(['update:modelValue'])
   inset: 0;
   z-index: 200;
   background: rgba(47, 48, 92, 0.35);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: flex-end;

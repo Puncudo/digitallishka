@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
-    "build": "vite build",
+    "build": "vite build && node -e \"require('fs').copyFileSync('docs/index.html','docs/404.html')\"",
     "preview": "vite preview"
   },
   "dependencies": {
