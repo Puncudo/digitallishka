@@ -11,6 +11,9 @@ function isActive(item) {
   if (item.id === 'search') {
     return path === '/search' || path.startsWith('/candidates/')
   }
+  if (item.id === 'home') {
+    return path === '/home'
+  }
   return path === item.route
 }
 </script>

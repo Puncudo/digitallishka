@@ -3,9 +3,11 @@ import ProfileView     from '@/views/ProfileView.vue'
 import PlaceholderView from '@/views/PlaceholderView.vue'
 import SearchView      from '@/views/SearchView.vue'
 import FavoritesView   from '@/views/FavoritesView.vue'
+import HomeView        from '@/views/HomeView.vue'
 
 const routes = [
-  { path: '/',                    redirect: '/candidates/031697151' },
+  { path: '/',                    redirect: '/home' },
+  { path: '/home',                component: HomeView },
   { path: '/candidates/:id',      component: ProfileView },
   { path: '/search',              component: SearchView },
   { path: '/favorites',           component: FavoritesView },

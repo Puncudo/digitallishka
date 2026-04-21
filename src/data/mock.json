@@ -312,9 +312,368 @@
     { "id": "settings",   "label": "הגדרות",        "route": "/settings",             "icon": "settings" }
   ],
   "bottomNav": [
-    { "id": "home",      "label": "ראשי",    "route": "/candidates/031697151", "icon": "home"   },
+    { "id": "home",      "label": "ראשי",    "route": "/home",                 "icon": "home"   },
     { "id": "search",    "label": "חיפוש",   "route": "/search",               "icon": "search" },
     { "id": "favorites", "label": "מועדפים", "route": "/favorites",            "icon": "star"   },
     { "id": "dashboard", "label": "דשבורד",  "route": "/dashboard",            "icon": "grid"   }
+  ],
+  "admin": {
+    "name": "יונתן ברק",
+    "role": "מדריך קהילה"
+  },
+  "schools": [
+    {
+      "id": "school1",
+      "name": "הגימנסיה העברית הרצליה",
+      "address": "רחוב הירקון 165, תל אביב",
+      "mapsUrl": "https://maps.google.com/?q=הגימנסיה+העברית+הרצליה+תל+אביב",
+      "students": {
+        "יא": 48,
+        "יב": 36
+      },
+      "tzvBtzvata": {
+        "date": "15.06.2026",
+        "label": "צו בצוותא הקרוב"
+      },
+      "representatives": [
+        {
+          "id": "rep1",
+          "name": "מיכל ירושלמי כהן",
+          "idNumber": "200544857",
+          "role": "רכזת",
+          "phone": "052-6251487",
+          "email": "michal@gmail.com"
+        },
+        {
+          "id": "rep2",
+          "name": "אורן לבקוביץ'",
+          "idNumber": "031697151",
+          "role": "מנהל",
+          "phone": "054-3219876",
+          "email": "oren.l@gmail.com"
+        },
+        {
+          "id": "rep3",
+          "name": "אלכסנדר קוריסקי",
+          "idNumber": "031697151",
+          "role": "מנהל",
+          "phone": "050-7654321",
+          "email": "alex.k@gmail.com"
+        }
+      ],
+      "urgentTasks": [
+        {
+          "id": "ut1",
+          "name": "נתנאל בן ציון",
+          "idNumber": "031697151",
+          "description": "חסרים מסמכים - שאלון רפואי, בדיקת ראיה",
+          "date": "12.03.26",
+          "color": "#FF1D47"
+        },
+        {
+          "id": "ut2",
+          "name": "מיכאל אנטוקולסקי שלו",
+          "idNumber": "031697151",
+          "description": "חסרים מסמכים - שאלון רפואי, בדיקת ראיה",
+          "date": "12.03.26",
+          "color": "#FF1D47"
+        },
+        {
+          "id": "ut3",
+          "name": "מורן גבע",
+          "idNumber": "031697151",
+          "description": "צו1",
+          "date": "12.03.26",
+          "color": "#FFD16A"
+        }
+      ],
+      "missionData": {
+        "indicators": [
+          { "label": "צו 12", "count": 14 },
+          { "label": "פקודת מעצר", "count": 14 },
+          { "label": "נפ\"א בנמ\"ש", "count": 4 },
+          { "label": "תתקדמו", "count": 6, "active": true },
+          { "label": "עולים", "count": 6 }
+        ],
+        "grades": {
+          "all": {
+            "total": 84,
+            "completed": 72,
+            "completedPct": 70,
+            "inProgress": 18,
+            "inProgressPct": 18,
+            "notDone": 12,
+            "notDonePct": 12
+          },
+          "יא": {
+            "total": 48,
+            "completed": 38,
+            "completedPct": 79,
+            "inProgress": 6,
+            "inProgressPct": 13,
+            "notDone": 4,
+            "notDonePct": 8
+          },
+          "יב": {
+            "total": 36,
+            "completed": 34,
+            "completedPct": 58,
+            "inProgress": 12,
+            "inProgressPct": 25,
+            "notDone": 8,
+            "notDonePct": 17
+          }
+        },
+        "missions": [
+          { "id": "m1", "name": "שאלון אימות נתונים", "hasAlert": true, "total": 129, "completed": 73, "missing": 56, "percent": 67 },
+          { "id": "m2", "name": "התחברות לאתר", "hasAlert": false, "total": 129, "completed": 73, "missing": 56, "percent": 38 },
+          { "id": "m3", "name": "שאלון רפואי", "hasAlert": false, "total": 129, "completed": 73, "missing": 56, "percent": 81 },
+          { "id": "m4", "name": "בדיקת ראיה", "hasAlert": false, "total": 129, "completed": 73, "missing": 56, "percent": 88 },
+          { "id": "m5", "name": "לקות למידה", "hasAlert": false, "total": 129, "completed": 73, "missing": 56, "percent": 88 },
+          { "id": "m6", "name": "לומדות דפ\"ר", "hasAlert": false, "total": 129, "completed": 73, "missing": 56, "percent": 34 }
+        ],
+        "missionStudents": [
+          { "id": "ms1",  "name": "נתנאל בן ציון",       "idNumber": "031697151", "hasAlert": true,  "indicators": ["צו 12", "תתקדמו"],              "statuses": { "m1": "לא בוצע", "m2": "לא בוצע", "m3": "בוצע",    "m4": "בוצע",    "m5": "בוצע",    "m6": "לא בוצע" } },
+          { "id": "ms2",  "name": "מיכאל אנטוקולסקי שלו", "idNumber": "031697151", "hasAlert": false, "indicators": ["פקודת מעצר", "עולים"],           "statuses": { "m1": "לא בוצע", "m2": "בתהליך",  "m3": "בוצע",    "m4": "בוצע",    "m5": "לא בוצע", "m6": "בתהליך"  } },
+          { "id": "ms3",  "name": "שרה לוי",              "idNumber": "031697151", "hasAlert": false, "indicators": ["צו 12"],                          "statuses": { "m1": "בוצע",    "m2": "בוצע",    "m3": "בתהליך",  "m4": "בוצע",    "m5": "בוצע",    "m6": "בוצע"    } },
+          { "id": "ms4",  "name": "תומר מרציאנו",         "idNumber": "031697151", "hasAlert": false, "indicators": ["נפ\"א בנמ\"ש", "תתקדמו"],       "statuses": { "m1": "בוצע",    "m2": "בתהליך",  "m3": "בוצע",    "m4": "בתהליך",  "m5": "בוצע",    "m6": "לא בוצע" } },
+          { "id": "ms5",  "name": "שחר כהן אהרוני",       "idNumber": "031697151", "hasAlert": false, "indicators": ["צו 12", "פקודת מעצר"],            "statuses": { "m1": "לא בוצע", "m2": "לא בוצע", "m3": "לא בוצע", "m4": "בוצע",    "m5": "לא בוצע", "m6": "בתהליך"  } },
+          { "id": "ms6",  "name": "ענבל גרין",            "idNumber": "031697151", "hasAlert": false, "indicators": ["עולים"],                           "statuses": { "m1": "בוצע",    "m2": "בוצע",    "m3": "בוצע",    "m4": "בוצע",    "m5": "בתהליך",  "m6": "בוצע"    } },
+          { "id": "ms7",  "name": "אלישע חדד",            "idNumber": "031697151", "hasAlert": false, "indicators": ["צו 12", "עולים"],                  "statuses": { "m1": "בוצע",    "m2": "בוצע",    "m3": "בתהליך",  "m4": "לא בוצע", "m5": "בוצע",    "m6": "בוצע"    } },
+          { "id": "ms8",  "name": "דניאל בוגן",           "idNumber": "031697151", "hasAlert": false, "indicators": ["פקודת מעצר"],                      "statuses": { "m1": "בוצע",    "m2": "בתהליך",  "m3": "בוצע",    "m4": "בוצע",    "m5": "בוצע",    "m6": "לא בוצע" } },
+          { "id": "ms9",  "name": "יוני חננאל",           "idNumber": "031697151", "hasAlert": false, "indicators": ["תתקדמו", "נפ\"א בנמ\"ש"],       "statuses": { "m1": "לא בוצע", "m2": "בוצע",    "m3": "בוצע",    "m4": "בתהליך",  "m5": "לא בוצע", "m6": "בוצע"    } },
+          { "id": "ms10", "name": "רוני שמעון",           "idNumber": "031697151", "hasAlert": false, "indicators": ["צו 12", "פקודת מעצר", "תתקדמו"], "statuses": { "m1": "בתהליך",  "m2": "בוצע",    "m3": "לא בוצע", "m4": "בוצע",    "m5": "בוצע",    "m6": "בתהליך"  } }
+        ]
+      }
+    },
+    {
+      "id": "school2",
+      "name": "תיכון אורט באר שבע",
+      "address": "רחוב הנשיא 12, באר שבע",
+      "mapsUrl": "https://maps.google.com/?q=תיכון+אורט+באר+שבע",
+      "students": {
+        "יא": 62,
+        "יב": 41
+      },
+      "tzvBtzvata": {
+        "date": "22.06.2026",
+        "label": "צו בצוותא הקרוב"
+      },
+      "representatives": [
+        {
+          "id": "rep4",
+          "name": "דנה שמיר",
+          "idNumber": "028765123",
+          "role": "רכזת",
+          "phone": "053-1234567",
+          "email": "dana.s@gmail.com"
+        },
+        {
+          "id": "rep5",
+          "name": "יוסי אברהם",
+          "idNumber": "031245999",
+          "role": "מנהל",
+          "phone": "050-9998877",
+          "email": "yossi.a@gmail.com"
+        }
+      ],
+      "urgentTasks": [
+        {
+          "id": "ut4",
+          "name": "יעל דוידוב",
+          "idNumber": "029456789",
+          "description": "לא הגיע ליום הדמיה",
+          "date": "15.03.26",
+          "color": "#FF1D47"
+        },
+        {
+          "id": "ut5",
+          "name": "אלון שפירא",
+          "idNumber": "031234567",
+          "description": "צו ראשון - ממתין לאישור",
+          "date": "18.03.26",
+          "color": "#FFD16A"
+        }
+      ],
+      "missionData": {
+        "indicators": [
+          { "label": "צו 12", "count": 10 },
+          { "label": "פקודת מעצר", "count": 8 },
+          { "label": "נפ\"א בנמ\"ש", "count": 3 },
+          { "label": "תתקדמו", "count": 4, "active": true },
+          { "label": "עולים", "count": 5 }
+        ],
+        "grades": {
+          "all": {
+            "total": 103,
+            "completed": 65,
+            "completedPct": 63,
+            "inProgress": 22,
+            "inProgressPct": 21,
+            "notDone": 16,
+            "notDonePct": 16
+          },
+          "יא": {
+            "total": 62,
+            "completed": 40,
+            "completedPct": 65,
+            "inProgress": 14,
+            "inProgressPct": 23,
+            "notDone": 8,
+            "notDonePct": 12
+          },
+          "יב": {
+            "total": 41,
+            "completed": 25,
+            "completedPct": 61,
+            "inProgress": 8,
+            "inProgressPct": 20,
+            "notDone": 8,
+            "notDonePct": 19
+          }
+        },
+        "missions": [
+          { "id": "m7", "name": "שאלון אימות נתונים", "hasAlert": false, "total": 103, "completed": 58, "missing": 45, "percent": 56 },
+          { "id": "m8", "name": "התחברות לאתר", "hasAlert": false, "total": 103, "completed": 42, "missing": 61, "percent": 41 },
+          { "id": "m9", "name": "שאלון רפואי", "hasAlert": true, "total": 103, "completed": 80, "missing": 23, "percent": 78 },
+          { "id": "m10", "name": "בדיקת ראיה", "hasAlert": false, "total": 103, "completed": 90, "missing": 13, "percent": 87 },
+          { "id": "m11", "name": "לקות למידה", "hasAlert": false, "total": 103, "completed": 75, "missing": 28, "percent": 73 },
+          { "id": "m12", "name": "לומדות דפ\"ר", "hasAlert": false, "total": 103, "completed": 30, "missing": 73, "percent": 29 }
+        ],
+        "missionStudents": [
+          { "id": "ms11", "name": "יעל דוידוב",     "idNumber": "029456789", "hasAlert": false, "indicators": ["צו 12", "פקודת מעצר"],   "statuses": { "m7": "בוצע",    "m8": "לא בוצע", "m9": "בוצע",    "m10": "בוצע",    "m11": "בתהליך",  "m12": "לא בוצע" } },
+          { "id": "ms12", "name": "אלון שפירא",     "idNumber": "031234567", "hasAlert": true,  "indicators": ["תתקדמו"],                  "statuses": { "m7": "לא בוצע", "m8": "בתהליך",  "m9": "בוצע",    "m10": "בוצע",    "m11": "בוצע",    "m12": "בתהליך"  } },
+          { "id": "ms13", "name": "מאיה כהן",       "idNumber": "028111222", "hasAlert": false, "indicators": ["עולים", "צו 12"],            "statuses": { "m7": "בוצע",    "m8": "בוצע",    "m9": "בתהליך",  "m10": "לא בוצע", "m11": "בוצע",    "m12": "בוצע"    } },
+          { "id": "ms14", "name": "עידן פרץ",       "idNumber": "031555666", "hasAlert": false, "indicators": ["נפ\"א בנמ\"ש"],             "statuses": { "m7": "בתהליך",  "m8": "בוצע",    "m9": "לא בוצע", "m10": "בוצע",    "m11": "לא בוצע", "m12": "בוצע"    } },
+          { "id": "ms15", "name": "נועה רביב",      "idNumber": "029888777", "hasAlert": false, "indicators": ["פקודת מעצר", "תתקדמו"],     "statuses": { "m7": "בוצע",    "m8": "בוצע",    "m9": "בוצע",    "m10": "בתהליך",  "m11": "בוצע",    "m12": "לא בוצע" } },
+          { "id": "ms16", "name": "גל סבג",         "idNumber": "031444333", "hasAlert": false, "indicators": ["צו 12"],                      "statuses": { "m7": "לא בוצע", "m8": "לא בוצע", "m9": "בוצע",    "m10": "בוצע",    "m11": "בתהליך",  "m12": "בוצע"    } },
+          { "id": "ms17", "name": "אורי ביטון",     "idNumber": "028999111", "hasAlert": false, "indicators": ["עולים", "פקודת מעצר"],       "statuses": { "m7": "בוצע",    "m8": "בתהליך",  "m9": "בתהליך",  "m10": "בוצע",    "m11": "בוצע",    "m12": "בתהליך"  } },
+          { "id": "ms18", "name": "שירה אזולאי",    "idNumber": "031777888", "hasAlert": false, "indicators": ["תתקדמו", "צו 12"],            "statuses": { "m7": "בתהליך",  "m8": "בוצע",    "m9": "בוצע",    "m10": "לא בוצע", "m11": "לא בוצע", "m12": "בוצע"    } }
+        ]
+      }
+    },
+    {
+      "id": "school3",
+      "name": "תיכון עירוני ה' חיפה",
+      "address": "שדרות הנשיא 43, חיפה",
+      "mapsUrl": "https://maps.google.com/?q=תיכון+עירוני+ה+חיפה",
+      "students": {
+        "יא": 55,
+        "יב": 38
+      },
+      "tzvBtzvata": {
+        "date": "29.06.2026",
+        "label": "צו בצוותא הקרוב"
+      },
+      "representatives": [
+        {
+          "id": "rep6",
+          "name": "רונית גולן",
+          "idNumber": "029111444",
+          "role": "רכזת",
+          "phone": "054-5556677",
+          "email": "ronit.g@gmail.com"
+        },
+        {
+          "id": "rep7",
+          "name": "עמית דורון",
+          "idNumber": "031888222",
+          "role": "מנהל",
+          "phone": "052-1119988",
+          "email": "amit.d@gmail.com"
+        },
+        {
+          "id": "rep8",
+          "name": "הדס פרידמן",
+          "idNumber": "028333777",
+          "role": "רכזת",
+          "phone": "058-4443322",
+          "email": "hadas.f@gmail.com"
+        }
+      ],
+      "urgentTasks": [
+        {
+          "id": "ut6",
+          "name": "רון אביטל",
+          "idNumber": "028654321",
+          "description": "חסר שאלון ביטחוני",
+          "date": "20.03.26",
+          "color": "#FF1D47"
+        },
+        {
+          "id": "ut7",
+          "name": "ליאור כץ",
+          "idNumber": "031999888",
+          "description": "בדיקת כושר - לא בוצע",
+          "date": "22.03.26",
+          "color": "#FFD16A"
+        },
+        {
+          "id": "ut8",
+          "name": "שני מזרחי",
+          "idNumber": "029777666",
+          "description": "חסרים מסמכים - אישור רפואי",
+          "date": "25.03.26",
+          "color": "#FF1D47"
+        }
+      ],
+      "missionData": {
+        "indicators": [
+          { "label": "צו 12", "count": 12 },
+          { "label": "פקודת מעצר", "count": 11 },
+          { "label": "נפ\"א בנמ\"ש", "count": 5 },
+          { "label": "תתקדמו", "count": 7, "active": true },
+          { "label": "עולים", "count": 3 }
+        ],
+        "grades": {
+          "all": {
+            "total": 93,
+            "completed": 60,
+            "completedPct": 65,
+            "inProgress": 20,
+            "inProgressPct": 22,
+            "notDone": 13,
+            "notDonePct": 13
+          },
+          "יא": {
+            "total": 55,
+            "completed": 38,
+            "completedPct": 69,
+            "inProgress": 10,
+            "inProgressPct": 18,
+            "notDone": 7,
+            "notDonePct": 13
+          },
+          "יב": {
+            "total": 38,
+            "completed": 22,
+            "completedPct": 58,
+            "inProgress": 10,
+            "inProgressPct": 26,
+            "notDone": 6,
+            "notDonePct": 16
+          }
+        },
+        "missions": [
+          { "id": "m13", "name": "שאלון אימות נתונים", "hasAlert": false, "total": 93, "completed": 62, "missing": 31, "percent": 67 },
+          { "id": "m14", "name": "התחברות לאתר", "hasAlert": true, "total": 93, "completed": 35, "missing": 58, "percent": 38 },
+          { "id": "m15", "name": "שאלון רפואי", "hasAlert": false, "total": 93, "completed": 70, "missing": 23, "percent": 75 },
+          { "id": "m16", "name": "בדיקת ראיה", "hasAlert": false, "total": 93, "completed": 85, "missing": 8, "percent": 91 },
+          { "id": "m17", "name": "לקות למידה", "hasAlert": false, "total": 93, "completed": 80, "missing": 13, "percent": 86 },
+          { "id": "m18", "name": "לומדות דפ\"ר", "hasAlert": false, "total": 93, "completed": 40, "missing": 53, "percent": 43 }
+        ],
+        "missionStudents": [
+          { "id": "ms19", "name": "רון אביטל",      "idNumber": "028654321", "hasAlert": true,  "indicators": ["צו 12", "עולים"],               "statuses": { "m13": "לא בוצע", "m14": "בוצע",    "m15": "בוצע",    "m16": "בוצע",    "m17": "לא בוצע", "m18": "בתהליך"  } },
+          { "id": "ms20", "name": "ליאור כץ",       "idNumber": "031999888", "hasAlert": false, "indicators": ["פקודת מעצר"],                   "statuses": { "m13": "בוצע",    "m14": "בתהליך",  "m15": "בוצע",    "m16": "בתהליך",  "m17": "בוצע",    "m18": "בוצע"    } },
+          { "id": "ms21", "name": "שני מזרחי",      "idNumber": "029777666", "hasAlert": false, "indicators": ["תתקדמו", "נפ\"א בנמ\"ש"],    "statuses": { "m13": "בוצע",    "m14": "לא בוצע", "m15": "בתהליך",  "m16": "בוצע",    "m17": "בוצע",    "m18": "לא בוצע" } },
+          { "id": "ms22", "name": "איתמר לוי",      "idNumber": "031222333", "hasAlert": false, "indicators": ["צו 12", "פקודת מעצר"],          "statuses": { "m13": "בתהליך",  "m14": "בוצע",    "m15": "בוצע",    "m16": "לא בוצע", "m17": "בתהליך",  "m18": "בוצע"    } },
+          { "id": "ms23", "name": "הילה ברקוביץ",   "idNumber": "028555444", "hasAlert": false, "indicators": ["עולים"],                          "statuses": { "m13": "בוצע",    "m14": "בוצע",    "m15": "לא בוצע", "m16": "בוצע",    "m17": "בוצע",    "m18": "בתהליך"  } },
+          { "id": "ms24", "name": "אדם סגל",        "idNumber": "031333222", "hasAlert": false, "indicators": ["צו 12", "תתקדמו"],               "statuses": { "m13": "לא בוצע", "m14": "בתהליך",  "m15": "בוצע",    "m16": "בוצע",    "m17": "לא בוצע", "m18": "בוצע"    } },
+          { "id": "ms25", "name": "תמר עוז",        "idNumber": "029444555", "hasAlert": false, "indicators": ["פקודת מעצר", "נפ\"א בנמ\"ש"], "statuses": { "m13": "בוצע",    "m14": "בוצע",    "m15": "בתהליך",  "m16": "בתהליך",  "m17": "בוצע",    "m18": "לא בוצע" } },
+          { "id": "ms26", "name": "דביר נחמני",     "idNumber": "031666555", "hasAlert": false, "indicators": ["צו 12"],                          "statuses": { "m13": "בתהליך",  "m14": "לא בוצע", "m15": "בוצע",    "m16": "בוצע",    "m17": "בוצע",    "m18": "בוצע"    } },
+          { "id": "ms27", "name": "מור אלמוג",      "idNumber": "028777666", "hasAlert": false, "indicators": ["עולים", "תתקדמו"],               "statuses": { "m13": "בוצע",    "m14": "בוצע",    "m15": "בוצע",    "m16": "לא בוצע", "m17": "בתהליך",  "m18": "בתהליך"  } }
+        ]
+      }
+    }
   ]
 }
