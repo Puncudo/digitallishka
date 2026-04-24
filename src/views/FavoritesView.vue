@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/useAppStore'
+import AppIcon from '@/components/ui/AppIcon.vue'
 import mockData from '@/data/mock.json'
 
 const router = useRouter()
@@ -37,7 +38,10 @@ function callPhone(phone) {
         <!-- Top row: name/school + star -->
         <div class="fav-card__top">
           <div class="fav-card__info">
-            <span class="fav-card__name">{{ candidate.name }}</span>
+            <div class="fav-card__name-row">
+              <AppIcon :name="candidate.gender === 'F' ? 'female' : 'male'" :size="14" class="fav-gender-icon" />
+              <span class="fav-card__name">{{ candidate.name }}</span>
+            </div>
             <span class="fav-card__school">{{ candidate.school }}</span>
           </div>
           <button
@@ -59,14 +63,10 @@ function callPhone(phone) {
         <!-- Bottom row: action buttons -->
         <div class="fav-card__actions">
           <button class="action-btn action-btn--whatsapp" @click.stop="openWhatsApp(candidate.phone)" aria-label="וואטסאפ">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 0C4.477 0 0 4.477 0 10C0 11.89 0.525 13.66 1.438 15.188L0.063 19.375L4.375 18.031C5.85 18.875 7.563 19.375 9.375 19.438V20H10C15.523 20 20 15.523 20 10C20 4.477 15.523 0 10 0ZM10 18C8.275 18 6.675 17.5 5.313 16.625L4.938 16.375L2.125 17.25L3.063 14.5L2.75 14.063C1.8 12.65 1.25 10.975 1.25 9.188C1.25 9.125 1.25 9.063 1.25 9H1.25C1.313 5.15 4.525 2 8.375 2H10C14.413 2 18 5.588 18 10C18 14.413 14.413 18 10 18ZM14.375 12.125C14.125 12 12.988 11.438 12.75 11.35C12.513 11.263 12.338 11.213 12.163 11.463C11.988 11.713 11.538 12.237 11.388 12.413C11.238 12.588 11.088 12.613 10.838 12.488C10.588 12.363 9.838 12.113 8.95 11.313C8.263 10.7 7.8 9.938 7.65 9.688C7.5 9.438 7.638 9.3 7.763 9.175C7.875 9.063 8.013 8.875 8.138 8.725C8.263 8.575 8.3 8.463 8.388 8.288C8.475 8.113 8.425 7.963 8.363 7.838C8.3 7.713 7.8 6.575 7.575 6.075C7.363 5.6 7.138 5.663 6.975 5.663C6.825 5.65 6.65 5.65 6.475 5.65C6.3 5.65 6.013 5.713 5.775 5.963C5.538 6.213 4.938 6.775 4.938 7.913C4.938 9.05 5.8 10.15 5.925 10.325C6.05 10.5 7.788 13.2 10.475 14.2C11.025 14.425 11.45 14.563 11.788 14.663C12.35 14.838 12.863 14.813 13.275 14.75C13.738 14.675 14.663 14.175 14.875 13.625C15.088 13.075 15.088 12.613 15.025 12.488C14.963 12.375 14.625 12.25 14.375 12.125Z" fill="white"/>
-            </svg>
+            <AppIcon name="whatsapp" :size="18" />
           </button>
           <button class="action-btn action-btn--call" @click.stop="callPhone(candidate.phone)" aria-label="התקשר">
-            <svg width="18" height="17" viewBox="0 0 18 17" fill="none">
-              <path d="M16.5 12.69V14.94C16.5 15.4508 16.0908 15.87 15.59 15.87C7.37 15.87 0.75 9.25 0.75 1.03C0.75 0.529 1.169 0.12 1.67 0.12H3.92C4.42 0.12 4.84 0.529 4.84 1.03C4.84 2.14 4.99 3.2 5.27 4.2C5.36 4.53 5.27 4.89 5.01 5.15L3.48 6.68C4.94 9.55 7.32 11.93 10.19 13.39L11.72 11.86C11.98 11.6 12.34 11.51 12.67 11.6C13.67 11.88 14.73 12.03 15.84 12.03C16.34 12.03 16.5 12.19 16.5 12.69Z" fill="white"/>
-            </svg>
+            <AppIcon name="phone" :size="18" />
           </button>
         </div>
       </div>
@@ -162,6 +162,16 @@ function callPhone(phone) {
   gap: 2px;
 }
 
+.fav-card__name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fav-gender-icon {
+  color: #2F305C;
+}
+
 .fav-card__name {
   font-family: 'Noto Sans Hebrew', sans-serif;
   font-weight: 600;
@@ -212,10 +222,12 @@ function callPhone(phone) {
 
 .action-btn--whatsapp {
   background: #5D87FF;
+  color: white;
 }
 
 .action-btn--call {
   background: #999999;
+  color: white;
 }
 
 /* Empty state */

@@ -2,14 +2,16 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '@/stores/useAppStore'
+import AppIcon from '@/components/ui/AppIcon.vue'
 import mockData from '@/data/mock.json'
 
 const router = useRouter()
 const store = useAppStore()
 const query = ref('')
 
-const recentSearches = mockData.searchResults.recent
-const allCandidates = mockData.searchResults.candidates
+const genderMap = Object.fromEntries(mockData.candidates.map(c => [c.id, c.gender]))
+const recentSearches = mockData.searchResults.recent.map(r => ({ ...r, gender: genderMap[r.id] || 'M' }))
+const allCandidates = mockData.searchResults.candidates.map(c => ({ ...c, gender: genderMap[c.id] || 'M' }))
 
 const filteredResults = computed(() => {
   const q = query.value.trim()
@@ -76,11 +78,8 @@ function clearSearch() {
           >
             <div class="result-info">
               <span class="icon-wrap">
-                <svg class="person-icon" width="14" height="17" viewBox="0 0 14 17" fill="none">
-                  <path d="M7 8C9.21 8 11 6.21 11 4C11 1.79 9.21 0 7 0C4.79 0 3 1.79 3 4C3 6.21 4.79 8 7 8Z" fill="#2F305C"/>
-                  <path d="M7 10C3.13 10 0 12.13 0 14.75V17H14V14.75C14 12.13 10.87 10 7 10Z" fill="#2F305C"/>
-                </svg>
-                <svg v-if="store.isFavorite(item.id)" class="fav-badge" width="10" height="10" viewBox="0 0 24 24" fill="#FFD16A">
+                <AppIcon :name="item.gender === 'F' ? 'female' : 'male'" :size="14" class="person-icon" />
+                <svg v-if="store.isFavorite(item.id)" class="fav-badge" width="14" height="14" viewBox="0 0 24 24" fill="#FFD16A">
                   <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005z" clip-rule="evenodd"/>
                 </svg>
               </span>
@@ -108,11 +107,8 @@ function clearSearch() {
           >
             <div class="result-info">
               <span class="icon-wrap">
-                <svg class="person-icon" width="14" height="17" viewBox="0 0 14 17" fill="none">
-                  <path d="M7 8C9.21 8 11 6.21 11 4C11 1.79 9.21 0 7 0C4.79 0 3 1.79 3 4C3 6.21 4.79 8 7 8Z" fill="#2F305C"/>
-                  <path d="M7 10C3.13 10 0 12.13 0 14.75V17H14V14.75C14 12.13 10.87 10 7 10Z" fill="#2F305C"/>
-                </svg>
-                <svg v-if="store.isFavorite(item.id)" class="fav-badge" width="10" height="10" viewBox="0 0 24 24" fill="#FFD16A">
+                <AppIcon :name="item.gender === 'F' ? 'female' : 'male'" :size="14" class="person-icon" />
+                <svg v-if="store.isFavorite(item.id)" class="fav-badge" width="14" height="14" viewBox="0 0 24 24" fill="#FFD16A">
                   <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005z" clip-rule="evenodd"/>
                 </svg>
               </span>
@@ -264,13 +260,13 @@ function clearSearch() {
 
 .person-icon {
   flex-shrink: 0;
+  color: #2F305C;
 }
 
 .fav-badge {
   position: absolute;
-  bottom: -2px;
-  left: -2px;
-  filter: drop-shadow(0 0 1px rgba(0,0,0,.3));
+  bottom: -4px;
+  left: -6px;
 }
 
 .result-name {

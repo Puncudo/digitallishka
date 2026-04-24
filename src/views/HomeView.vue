@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import mockData from '@/data/mock.json'
 import BaseDrawer from '@/components/ui/BaseDrawer.vue'
+import AppIcon from '@/components/ui/AppIcon.vue'
 
 const admin = mockData.admin
 const schools = mockData.schools
@@ -399,13 +400,11 @@ const missionStudentCounts = computed(() => {
           <!-- Row 1: Address (only when single school selected) -->
           <div v-if="!isAll" class="detail-row">
             <div class="detail-content">
-              <svg class="detail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 13.43C13.7231 13.43 15.12 12.0331 15.12 10.31C15.12 8.58687 13.7231 7.19 12 7.19C10.2769 7.19 8.88 8.58687 8.88 10.31C8.88 12.0331 10.2769 13.43 12 13.43Z" fill="#FFD16A"/>
-                <path d="M3.62 8.49C5.59 -0.169998 18.42 -0.159998 20.38 8.5C21.53 13.58 18.37 17.88 15.6 20.54C13.59 22.48 10.41 22.48 8.39 20.54C5.63 17.88 2.47 13.57 3.62 8.49Z" fill="#FFD16A"/>
-              </svg>
+              <AppIcon name="address" :size="24" class="detail-icon" />
               <span class="detail-value">{{ selectedSchool.address }}</span>
             </div>
             <div class="detail-link" @click="openAddressDrawer">
+              <AppIcon name="send" :size="14" />
               <span class="link-text">לכתובת</span>
             </div>
           </div>
@@ -413,12 +412,7 @@ const missionStudentCounts = computed(() => {
           <!-- Row 2: צו בצוותא (only when single school selected) -->
           <div v-if="!isAll" class="detail-row">
             <div class="detail-content">
-              <svg class="detail-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M16 2V4M8 2V4M3 9H21M21 8V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8C3 5 4.5 3 8 3H16C19.5 3 21 5 21 8Z" stroke="#FFD16A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <path d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z" fill="#FFD16A"/>
-                <path d="M8 17C8.55228 17 9 16.5523 9 16C9 15.4477 8.55228 15 8 15C7.44772 15 7 15.4477 7 16C7 16.5523 7.44772 17 8 17Z" fill="#FFD16A"/>
-                <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" fill="#FFD16A"/>
-              </svg>
+              <AppIcon name="calendar" :size="24" class="detail-icon" />
               <span class="detail-value-bold">{{ selectedSchool.tzvBtzvata.label }} - {{ selectedSchool.tzvBtzvata.date }}</span>
             </div>
             <div class="detail-link" @click="openDatesDrawer">
@@ -463,19 +457,13 @@ const missionStudentCounts = computed(() => {
               <span class="rep-role">{{ rep.role }}</span>
               <div class="rep-buttons">
                 <a :href="'tel:' + rep.phone" class="rep-action-btn">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M16.5 14.3V16.3C16.5 16.7 16.2 17 15.8 17C7.6 17 1 10.4 1 2.2C1 1.8 1.3 1.5 1.7 1.5H3.7C4.1 1.5 4.4 1.8 4.4 2.2C4.4 3.4 4.6 4.5 5 5.5C5.1 5.8 5 6.1 4.8 6.3L3.3 7.8C4.7 10.5 7 12.8 9.7 14.2L11.2 12.7C11.4 12.5 11.7 12.4 12 12.5C13 12.9 14.1 13.1 15.3 13.1C15.7 13.1 16 13.4 16 13.8L16.5 14.3Z" fill="white"/>
-                  </svg>
+                  <AppIcon name="phone" :size="18" />
                 </a>
                 <a :href="'mailto:' + rep.email" class="rep-action-btn">
-                  <svg width="18" height="13" viewBox="0 0 18 13" fill="none">
-                    <path d="M1 1L9 7L17 1M1 12H17V1H1V12Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                  <AppIcon name="mail" :size="18" />
                 </a>
                 <a :href="'https://wa.me/972' + rep.phone.replace(/-/g,'').substring(1)" class="rep-action-btn" target="_blank">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M9 0C4.03 0 0 4.03 0 9C0 10.59 0.42 12.11 1.2 13.44L0 18L4.68 16.83C5.97 17.54 7.44 17.94 9 17.94C13.97 17.94 18 13.91 18 8.94C18 4.03 13.97 0 9 0ZM13.35 12.24C13.14 12.81 12.21 13.29 11.73 13.35C11.25 13.41 10.65 13.44 10.02 13.23C9.63 13.08 9.12 12.9 8.46 12.6C6.18 11.58 4.74 9.27 4.62 9.12C4.5 8.97 3.72 7.95 3.72 6.87C3.72 5.79 4.26 5.28 4.47 5.04C4.68 4.8 4.92 4.74 5.07 4.74C5.22 4.74 5.37 4.74 5.49 4.74C5.64 4.74 5.82 4.68 6 5.1C6.18 5.52 6.6 6.6 6.66 6.72C6.72 6.84 6.75 6.99 6.66 7.14C6.57 7.29 6.54 7.38 6.42 7.5C6.3 7.62 6.18 7.77 6.06 7.89C5.94 8.01 5.82 8.13 5.94 8.37C6.06 8.61 6.57 9.42 7.32 10.08C8.28 10.92 9.06 11.16 9.3 11.28C9.54 11.4 9.69 11.37 9.84 11.22C9.99 11.07 10.47 10.5 10.65 10.26C10.83 10.02 11.01 10.08 11.25 10.14C11.49 10.2 12.57 10.77 12.81 10.89C13.05 11.01 13.2 11.07 13.26 11.16C13.35 11.37 13.35 11.91 13.14 12.24H13.35Z" fill="white"/>
-                  </svg>
+                  <AppIcon name="whatsapp" :size="18" />
                 </a>
               </div>
             </div>
@@ -1338,11 +1326,14 @@ const missionStudentCounts = computed(() => {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  color: #FFD16A;
 }
 
 .detail-link {
   display: flex;
   align-items: center;
+  gap: 6px;
+  color: #FFFFFF;
 }
 
 .link-text {
@@ -1525,6 +1516,7 @@ const missionStudentCounts = computed(() => {
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.05);
   text-decoration: none;
   cursor: pointer;
+  color: white;
 }
 
 /* Urgent tasks section */
@@ -1756,8 +1748,9 @@ const missionStudentCounts = computed(() => {
   padding: 0;
   margin-top: 8px;
   font-family: 'Noto Sans Hebrew', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
   color: #5D87FF;
   cursor: pointer;
   text-decoration: underline;

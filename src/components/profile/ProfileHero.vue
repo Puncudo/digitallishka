@@ -25,13 +25,7 @@ const favorited = computed(() => store.isFavorite(props.candidate.id))
     <div class="hero-mobile__inner">
       <div class="hero-mobile__name-row">
         <!-- person icon — first in DOM = right in RTL -->
-        <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M9.66667 9.49996C11.2775 9.49996 12.5833 8.19412 12.5833 6.58329C12.5833 4.97246 11.2775 3.66663 9.66667 3.66663C8.05584 3.66663 6.75 4.97246 6.75 6.58329C6.75 8.19412 8.05584 9.49996 9.66667 9.49996Z"
-            fill="white" stroke="#F0F4FF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M10.9167 20.3333H8.41667L3 11.9999H16.3333L10.9167 20.3333Z" fill="white" stroke="#F0F4FF"
-            stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+        <AppIcon :name="candidate.gender === 'F' ? 'female' : 'male'" :size="20" class="hero-gender-icon" />
 
 
 
@@ -153,9 +147,10 @@ const favorited = computed(() => store.isFavorite(props.candidate.id))
 .hero-mobile__name-row {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 5px;
+  color: white;
 }
 
 .hero-mobile__name {
