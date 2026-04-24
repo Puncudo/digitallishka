@@ -4,6 +4,7 @@
     "id": "031697151",
     "name": "נתנאל בן ציון",
     "school": "תיכון אורט באר שבע",
+    "testDescription": "מועמד מלא: צו 12, אינדיקציות בתהליך, 6 אינדיקציות סהכ הכל (כולל alert), אינדיקציות סודיות, פרטים אישיים. צפוי: באר אדום עם +X chip, שורת pending, שורת סודיות.",
     "email": "netanel.b.z@gmail.com",
     "phone": "052-3690274",
     "headerStats": [
@@ -23,12 +24,14 @@
       { "id": 5, "title": "גיוס",        "date": "15.03.23", "status": "pending",   "editable": false, "alertText": null,      "icon": "trackDraft"     }
     ],
     "indications": [
-      { "id": 1, "label": "עולה חדש",    "date": "05.12.2025", "status": "active",  "statusLabel": "פעיל" },
-      { "id": 2, "label": "משפחה שכולה", "date": "05.12.2025", "status": "warning", "statusLabel": null   },
-      { "id": 3, "label": "תתקדמו",      "date": "05.12.2025", "status": "closed",  "statusLabel": "סגור" },
-      { "id": 4, "label": "ריסום גלידי", "date": "05.12.2025", "status": "closed",  "statusLabel": "סגור" },
-      { "id": 5, "label": "תחקורד",      "date": "05.12.2025", "status": "active",  "statusLabel": "פעיל" }
+      { "id": 1, "label": "עולה חדש",    "date": "05.12.2025", "status": "active",   "statusLabel": "פעיל" },
+      { "id": 2, "label": "משפחה שכולה", "date": "05.12.2025", "status": "active",   "statusLabel": "פעיל" },
+      { "id": 3, "label": "תתקדמו",      "date": "03.12.2025", "status": "pending",  "statusLabel": "בתהליך" },
+      { "id": 4, "label": "רישום פלילי", "date": "03.12.2025", "status": "approved", "statusLabel": "מאושר", "alert": true },
+      { "id": 5, "label": "רישום פלילי", "date": "03.12.2025", "status": "approved", "statusLabel": "מאושר" },
+      { "id": 6, "label": "צו 12",       "date": "12/01/26",   "status": "active",   "statusLabel": "פעיל", "tzav12": true }
     ],
+    "hasPendingIndications": true,
     "tasksTotal": 14,
     "tasks": [
       { "id": 1,  "title": "לסיור מחנה חינוך",    "date": "03.12.2025", "daysLeft": 3,    "type": "סיירת",  "status": "לא התייצב", "statusType": "purple"    },
@@ -69,12 +72,34 @@
       { "id": 17, "title": "בדיקת מסמכים",   "date": "10.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success"   },
       { "id": 18, "title": "סיום תהליך",     "date": "11.12.2025", "daysLeft": null, "type": "מנהלי",  "status": "לא בוצע",   "statusType": "danger"    }
     ],
-    "comment": "דוגמת תוכן דוחר פינות אמצע. קונסקטטור אדיפיסינג אלית, מה את צאלוחם ניס נו נכאת. דם אאקטקוס לא לאקסיו קאמ וי נישנת. קיראם את לקטוס ואם לאמו סטניבולמ סולייפ דאמוס גבריס."
+    "comment": "דוגמת תוכן דוחר פינות אמצע. קונסקטטור אדיפיסינג אלית, מה את צאלוחם ניס נו נכאת. דם אאקטקוס לא לאקסיו קאמ וי נישנת. קיראם את לקטוס ואם לאמו סטניבולמ סולייפ דאמוס גבריס.",
+    "personalDetails": {
+      "hebrewAge": "16.5",
+      "birthDate": "29.05.09",
+      "birthDateHebrew": "(16.4) 29.05.09",
+      "status": "מתכונן למיון ראשוני",
+      "statusReason": "ממתין למסמכים רפואיים",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "מיון ראשוני",
+      "citizenship": "ישראל, אוסטרליה",
+      "citizenshipBadge": "עולה חדש",
+      "religion": "יהודי",
+      "maritalStatus": "רווק",
+      "city": "תל אביב",
+      "fatherName": "ישראל ישראלי",
+      "fatherPhone": "052-1234567",
+      "motherName": "ישראלה ישראלי",
+      "motherPhone": "052-7654321",
+      "grade": "י\"א 3",
+      "school": "תיכון עירוני א', תל אביב"
+    }
   },
   {
     "id": "029834521",
     "name": "יונתן ברק",
     "school": "תיכון אזורי מועצה אזורית גזר",
+    "testDescription": "מועמד רגיל: 3 אינדיקציות (פעיל + סגור), ללא צו 12, ללא בתהליך, ללא סודיות. צפוי: רק באבלס כחולות ללא באנרים מיוחדים.",
+    "hasSecretIndications": true,
     "email": "yonatan.b@gmail.com",
     "phone": "054-7891234",
     "headerStats": [
@@ -119,7 +144,27 @@
       { "id": 7, "title": "עדכון תיק",        "date": "18.01.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" },
       { "id": 8, "title": "בדיקה רפואית",     "date": "20.01.2026", "daysLeft": null, "type": "בריאות", "status": "בתהליך",    "statusType": "warning" }
     ],
-    "comment": "מועמד מצטיין עם מוטיבציה גבוהה. יש לוודא השלמת מסמכים רפואיים."
+    "comment": "מועמד מצטיין עם מוטיבציה גבוהה. יש לוודא השלמת מסמכים רפואיים.",
+    "personalDetails": {
+      "hebrewAge": "16.4",
+      "birthDate": "29.05.09",
+      "birthDateHebrew": "(16.4) 29.05.09",
+      "status": "מתכונן למיון ראשוני",
+      "statusReason": "ממתין למסמכים רפואיים",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "מיון ראשוני",
+      "citizenship": "ישראל",
+      "citizenshipBadge": null,
+      "religion": "יהודי",
+      "maritalStatus": "רווק",
+      "city": "חיפה",
+      "fatherName": "ברק ברק",
+      "fatherPhone": "054-1112222",
+      "motherName": "רונית ברק",
+      "motherPhone": "054-3334444",
+      "grade": "י\"ב 1",
+      "school": "תיכון אזורי מועצה אזורית גזר"
+    }
   },
   {
     "id": "031245678",
@@ -169,6 +214,7 @@
     "id": "029876543",
     "name": "שירה כהן",
     "school": "תיכון בויאר ירושלים",
+    "testDescription": "מועמדת עם 2 אינדיקציות פעילות בלבד, ללא צו 12, ללא בתהליך, ללא סודיות. צפוי: 2 באבלס כחולות, ללא באנרים.",
     "email": "shira.k@gmail.com",
     "phone": "053-9876543",
     "headerStats": [
@@ -288,6 +334,401 @@
       { "id": 6, "title": "דיווח סיום שלב",   "date": "10.05.2026", "daysLeft": null, "type": "מנהלי", "status": "בוצע", "statusType": "success" }
     ],
     "comment": "מועמדת שהשלימה את כל התהליך בהצלחה מלאה."
+  },
+  {
+    "id": "032145678",
+    "name": "אבי מזרחי",
+    "school": "תיכון הראל חיפה",
+    "email": "avi.m@gmail.com",
+    "phone": "050-3214567",
+    "testDescription": "אין אינדיקציות בכלל. צפוי: אין באבלס כחולות, אין באנרים, אין שורות מידע – בודק שהקומפוננט לא קורס.",
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "01.01.10", "sub": "10:00:00" },
+      { "label": "זמן בתהליך",     "value": "10:00",    "sub": "01.01.10" },
+      { "label": "תשלום",          "value": "₪0",       "sub": null }
+    ],
+    "relatedPeople": [],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "01.01.26", "status": "completed", "editable": true,  "alertText": null, "icon": "trackRegister" },
+      { "id": 2, "title": "צו 1",        "date": "15.01.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackOrder" },
+      { "id": 3, "title": "יום הדמיה",   "date": "01.02.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackScreen" },
+      { "id": 4, "title": "שאלון גנדום", "date": "15.02.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackForm" },
+      { "id": 5, "title": "גיוס",        "date": "01.04.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackDraft" }
+    ],
+    "indications": [],
+    "tasksTotal": 3,
+    "tasks": [
+      { "id": 1, "title": "שאלון רפואי",      "date": "05.01.2026", "daysLeft": 5,    "type": "בריאות", "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 2, "title": "חתימת טפסים",      "date": "10.01.2026", "daysLeft": null, "type": "מנהלי",  "status": "בתהליך",    "statusType": "warning" },
+      { "id": 3, "title": "אישור מסמכים",     "date": "15.01.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" }
+    ],
+    "reportsTotal": 4,
+    "reportsOverdue": 2,
+    "reportsAlert": "דיווח לפני 1.1 ועבר",
+    "reports": [
+      { "id": 1, "title": "ביקור בית",    "date": "01.01.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 2, "title": "שיחת טלפון",   "date": "05.01.2026", "daysLeft": null, "type": "סיירת", "status": "לא בוצע", "statusType": "danger" },
+      { "id": 3, "title": "פגישה בלשכה",  "date": "08.01.2026", "daysLeft": null, "type": "סיירת", "status": "בתהליך",  "statusType": "warning" },
+      { "id": 4, "title": "דיווח שטח",    "date": "12.01.2026", "daysLeft": null, "type": "סיירת", "status": "לא בוצע", "statusType": "danger" }
+    ],
+    "comment": "מועמד בתחילת תהליך. ממתין להשלמת מסמכים ראשוניים.",
+    "personalDetails": {
+      "hebrewAge": "17.2",
+      "birthDate": "14.02.09",
+      "birthDateHebrew": "(17.1) 14.02.09",
+      "status": "ממתין לצו ראשון",
+      "statusReason": "טרם הוזמן",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "טרום מיון",
+      "citizenship": "ישראל",
+      "citizenshipBadge": null,
+      "religion": "יהודי",
+      "maritalStatus": "רווק",
+      "city": "חיפה",
+      "fatherName": "יוסף מזרחי",
+      "fatherPhone": "050-1112233",
+      "motherName": "רונית מזרחי",
+      "motherPhone": "050-4445566",
+      "grade": "י\"ב 2",
+      "school": "תיכון הראל, חיפה"
+    }
+  },
+  {
+    "id": "033256789",
+    "name": "בני אלבז",
+    "school": "תיכון הרצליה תל אביב",
+    "email": "beni.e@gmail.com",
+    "phone": "050-3325678",
+    "testDescription": "רק אינדיקציות בתהליך (2), ללא פעילות, ללא צו 12. צפוי: אין באבלס כחולות (כי אין פעילות), שורת pending מופיעה.",
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "05.03.10", "sub": "14:00:00" },
+      { "label": "זמן בתהליך",     "value": "14:00",    "sub": "05.03.10" },
+      { "label": "תשלום",          "value": "₪10,000",  "sub": null }
+    ],
+    "relatedPeople": [
+      { "id": 1, "name": "אלבז דוד", "relation": "אב", "location": "תל אביב", "ageGroup": "אמצע", "unit": "יחיד", "status": "פעיל" }
+    ],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "01.02.26", "status": "completed", "editable": true,  "alertText": null, "icon": "trackRegister" },
+      { "id": 2, "title": "צו 1",        "date": "15.02.26", "status": "completed", "editable": false, "alertText": null, "icon": "trackOrder" },
+      { "id": 3, "title": "יום הדמיה",   "date": "01.03.26", "status": "upcoming",  "editable": false, "alertText": null, "icon": "trackScreen" },
+      { "id": 4, "title": "שאלון גנדום", "date": "15.03.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackForm" },
+      { "id": 5, "title": "גיוס",        "date": "01.06.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackDraft" }
+    ],
+    "indications": [
+      { "id": 1, "label": "בדיקה רפואית", "date": "01.03.2026", "status": "pending", "statusLabel": "בתהליך" },
+      { "id": 2, "label": "אישור ביטחוני", "date": "05.03.2026", "status": "pending", "statusLabel": "בתהליך" }
+    ],
+    "hasPendingIndications": true,
+    "tasksTotal": 5,
+    "tasks": [
+      { "id": 1, "title": "שאלון רפואי",        "date": "10.03.2026", "daysLeft": 5,    "type": "בריאות", "status": "בתהליך",    "statusType": "warning" },
+      { "id": 2, "title": "ראיון קצין",         "date": "15.03.2026", "daysLeft": 10,   "type": "ראיון",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 3, "title": "בדיקת כושר",         "date": "20.03.2026", "daysLeft": null, "type": "בריאות", "status": "בתהליך",    "statusType": "warning" },
+      { "id": 4, "title": "חתימת טפסים",        "date": "25.03.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" },
+      { "id": 5, "title": "אישור מסמכים",       "date": "30.03.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" }
+    ],
+    "reportsTotal": 6,
+    "reportsOverdue": 3,
+    "reportsAlert": "דיווח לפני 5.3 על 5.3 ועבר",
+    "reports": [
+      { "id": 1, "title": "ביקור בית",        "date": "01.03.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 2, "title": "שיחת טלפון",       "date": "03.03.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 3, "title": "פגישה בלשכה",      "date": "06.03.2026", "daysLeft": null, "type": "סיירת", "status": "לא בוצע", "statusType": "danger" },
+      { "id": 4, "title": "דיווח שטח",        "date": "10.03.2026", "daysLeft": null, "type": "סיירת", "status": "לא בוצע", "statusType": "danger" },
+      { "id": 5, "title": "שיחה עם ההורים",   "date": "12.03.2026", "daysLeft": null, "type": "סיירת", "status": "בתהליך",  "statusType": "warning" },
+      { "id": 6, "title": "עדכון תיק",        "date": "15.03.2026", "daysLeft": null, "type": "מנהלי", "status": "לא בוצע", "statusType": "danger" }
+    ],
+    "comment": "מועמד עם אינדיקציות בתהליך. יש לעקוב אחר התקדמות הבדיקות.",
+    "personalDetails": {
+      "hebrewAge": "16.9",
+      "birthDate": "22.06.09",
+      "birthDateHebrew": "(16.8) 22.06.09",
+      "status": "בתהליך מיון",
+      "statusReason": "ממתין לתוצאות בדיקות",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "מיון ראשוני",
+      "citizenship": "ישראל",
+      "citizenshipBadge": null,
+      "religion": "יהודי",
+      "maritalStatus": "רווק",
+      "city": "תל אביב",
+      "fatherName": "דוד אלבז",
+      "fatherPhone": "050-2223344",
+      "motherName": "מיכל אלבז",
+      "motherPhone": "050-5556677",
+      "grade": "י\"א 1",
+      "school": "תיכון הרצליה, תל אביב"
+    }
+  },
+  {
+    "id": "034367891",
+    "name": "גלי פרידמן",
+    "school": "תיכון בילו ירושלים",
+    "email": "gali.f@gmail.com",
+    "phone": "050-4367891",
+    "testDescription": "צו 12 בלבד, ללא שום אינדיקציה אחרת. צפוי: באר אדום בלי +X chip, אין באבלס כחולות.",
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "10.06.10", "sub": "08:00:00" },
+      { "label": "זמן בתהליך",     "value": "08:00",    "sub": "10.06.10" },
+      { "label": "תשלום",          "value": "₪20,000",  "sub": null }
+    ],
+    "relatedPeople": [
+      { "id": 1, "name": "פרידמן משה", "relation": "אב", "location": "ירושלים", "ageGroup": "אמצע", "unit": "יחיד", "status": "פעיל" },
+      { "id": 2, "name": "פרידמן שרה", "relation": "אם", "location": "ירושלים", "ageGroup": "2 ש'",  "unit": "יחיד", "status": "פעיל" }
+    ],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "01.04.26", "status": "completed", "editable": true,  "alertText": null,      "icon": "trackRegister" },
+      { "id": 2, "title": "צו 1",        "date": "15.04.26", "status": "completed", "editable": false, "alertText": null,      "icon": "trackOrder" },
+      { "id": 3, "title": "יום הדמיה",   "date": "01.05.26", "status": "alert",     "editable": false, "alertText": "לא הגיע", "icon": "trackScreen" },
+      { "id": 4, "title": "שאלון גנדום", "date": "15.05.26", "status": "pending",   "editable": false, "alertText": null,      "icon": "trackForm" },
+      { "id": 5, "title": "גיוס",        "date": "01.08.26", "status": "pending",   "editable": false, "alertText": null,      "icon": "trackDraft" }
+    ],
+    "indications": [
+      { "id": 1, "label": "צו 12", "date": "20/04/26", "status": "active", "statusLabel": "פעיל", "tzav12": true }
+    ],
+    "tasksTotal": 4,
+    "tasks": [
+      { "id": 1, "title": "לסיור מחנה חינוך",  "date": "01.05.2026", "daysLeft": 3,    "type": "סיירת",  "status": "לא התייצב", "statusType": "purple" },
+      { "id": 2, "title": "שאלון רפואי",        "date": "05.05.2026", "daysLeft": null, "type": "בריאות", "status": "בוצע",      "statusType": "success" },
+      { "id": 3, "title": "ביקור ועדה",         "date": "10.05.2026", "daysLeft": 7,    "type": "ועדה",   "status": "בתהליך",    "statusType": "warning" },
+      { "id": 4, "title": "מבחן פסיכוטכני",     "date": "15.05.2026", "daysLeft": 12,   "type": "מבחן",   "status": "לא בוצע",   "statusType": "danger" }
+    ],
+    "reportsTotal": 3,
+    "reportsOverdue": 1,
+    "reportsAlert": "דיווח לפני 20.4 ועבר",
+    "reports": [
+      { "id": 1, "title": "ביקור בית",    "date": "20.04.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 2, "title": "שיחת טלפון",   "date": "25.04.2026", "daysLeft": null, "type": "סיירת", "status": "לא בוצע", "statusType": "danger" },
+      { "id": 3, "title": "דיווח ועדה",   "date": "01.05.2026", "daysLeft": null, "type": "ועדה",  "status": "בתהליך",  "statusType": "warning" }
+    ],
+    "comment": "מועמד עם צו 12. יש לעקוב מקרוב ולוודא התייצבות.",
+    "personalDetails": {
+      "hebrewAge": "17.0",
+      "birthDate": "10.04.09",
+      "birthDateHebrew": "(16.11) 10.04.09",
+      "status": "בצו 12",
+      "statusReason": "ממתין להתייצבות",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "מיון שני",
+      "citizenship": "ישראל",
+      "citizenshipBadge": null,
+      "religion": "יהודית",
+      "maritalStatus": "רווקה",
+      "city": "ירושלים",
+      "fatherName": "משה פרידמן",
+      "fatherPhone": "050-3334455",
+      "motherName": "שרה פרידמן",
+      "motherPhone": "050-6667788",
+      "grade": "י\"ב 1",
+      "school": "תיכון בילו, ירושלים"
+    }
+  },
+  {
+    "id": "035478912",
+    "name": "דנה שטרנברג",
+    "school": "תיכון אמית נתניה",
+    "email": "dana.s@gmail.com",
+    "phone": "050-5478912",
+    "testDescription": "2 אינדיקציות פעילות בלבד, ללא בתהליך, ללא צו 12, ללא סודיות. צפוי: 2 באבלס כחולות, ללא באנרים.",
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "20.07.10", "sub": "12:00:00" },
+      { "label": "זמן בתהליך",     "value": "12:00",    "sub": "20.07.10" },
+      { "label": "תשלום",          "value": "₪15,000",  "sub": null }
+    ],
+    "relatedPeople": [
+      { "id": 1, "name": "שטרנברג אלי", "relation": "אב", "location": "נתניה", "ageGroup": "אמצע", "unit": "יחיד", "status": "פעיל" }
+    ],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "01.05.26", "status": "completed", "editable": true,  "alertText": null, "icon": "trackRegister" },
+      { "id": 2, "title": "צו 1",        "date": "15.05.26", "status": "completed", "editable": false, "alertText": null, "icon": "trackOrder" },
+      { "id": 3, "title": "יום הדמיה",   "date": "01.06.26", "status": "completed", "editable": false, "alertText": null, "icon": "trackScreen" },
+      { "id": 4, "title": "שאלון גנדום", "date": "15.06.26", "status": "upcoming",  "editable": false, "alertText": null, "icon": "trackForm" },
+      { "id": 5, "title": "גיוס",        "date": "01.09.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackDraft" }
+    ],
+    "indications": [
+      { "id": 1, "label": "עולה חדש",    "date": "01.05.2026", "status": "active", "statusLabel": "פעיל" },
+      { "id": 2, "label": "משפחה שכולה", "date": "01.05.2026", "status": "active", "statusLabel": "פעיל" }
+    ],
+    "tasksTotal": 6,
+    "tasks": [
+      { "id": 1, "title": "לבדיקת גיוס ישיר",  "date": "01.06.2026", "daysLeft": 5,    "type": "סיירת",  "status": "בתהליך",    "statusType": "warning" },
+      { "id": 2, "title": "שאלון רפואי",        "date": "05.06.2026", "daysLeft": null, "type": "בריאות", "status": "בוצע",      "statusType": "success" },
+      { "id": 3, "title": "ראיון קצין",         "date": "10.06.2026", "daysLeft": 10,   "type": "ראיון",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 4, "title": "בדיקת כושר",         "date": "15.06.2026", "daysLeft": null, "type": "בריאות", "status": "בוצע",      "statusType": "success" },
+      { "id": 5, "title": "חתימת טפסים",        "date": "20.06.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" },
+      { "id": 6, "title": "אישור רפואי סופי",   "date": "25.06.2026", "daysLeft": null, "type": "בריאות", "status": "לא בוצע",   "statusType": "danger" }
+    ],
+    "reportsTotal": 5,
+    "reportsOverdue": 1,
+    "reportsAlert": "דיווח לפני 1.5 ועבר",
+    "reports": [
+      { "id": 1, "title": "ביקור בית",      "date": "01.05.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 2, "title": "שיחת טלפון",     "date": "05.05.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 3, "title": "פגישה בלשכה",    "date": "10.05.2026", "daysLeft": null, "type": "סיירת", "status": "בתהליך",  "statusType": "warning" },
+      { "id": 4, "title": "דיווח שטח",      "date": "15.05.2026", "daysLeft": null, "type": "סיירת", "status": "לא בוצע", "statusType": "danger" },
+      { "id": 5, "title": "שיחה עם ההורים", "date": "20.05.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" }
+    ],
+    "comment": "מועמדת עם רקע משפחה שכולה. יש להתייחס ברגישות.",
+    "personalDetails": {
+      "hebrewAge": "16.7",
+      "birthDate": "08.09.09",
+      "birthDateHebrew": "(16.6) 08.09.09",
+      "status": "בתהליך מיון",
+      "statusReason": "ממתינה לראיון קצין",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "מיון שני",
+      "citizenship": "ישראל, צרפת",
+      "citizenshipBadge": "עולה חדש",
+      "religion": "יהודית",
+      "maritalStatus": "רווקה",
+      "city": "נתניה",
+      "fatherName": "אלי שטרנברג",
+      "fatherPhone": "050-7778899",
+      "motherName": "ורד שטרנברג",
+      "motherPhone": "050-8889900",
+      "grade": "י\"א 4",
+      "school": "תיכון אמית, נתניה"
+    }
+  },
+  {
+    "id": "036589123",
+    "name": "הילה גולדשטיין",
+    "school": "תיכון מקיף אשדוד",
+    "email": "hila.g@gmail.com",
+    "phone": "050-6589123",
+    "testDescription": "צו 12 + בתהליך + 5 אינדיקציות (כולל alert + מאושר), אינדיקציות סודיות. צפוי: באר אדום + שורת pending + שורת סודיות + באבלס עם +X chip.",
+    "hasSecretIndications": true,
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "15.09.10", "sub": "16:00:00" },
+      { "label": "זמן בתהליך",     "value": "16:00",    "sub": "15.09.10" },
+      { "label": "תשלום",          "value": "₪50,000",  "sub": null }
+    ],
+    "relatedPeople": [
+      { "id": 1, "name": "גולדשטיין עמוס", "relation": "אב", "location": "אשדוד", "ageGroup": "אמצע", "unit": "טנד אחד", "status": "פעיל" },
+      { "id": 2, "name": "גולדשטיין נעמה", "relation": "אם", "location": "אשדוד", "ageGroup": "3 ש'",  "unit": "יחיד",    "status": "סגור" }
+    ],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "01.06.26", "status": "completed", "editable": true,  "alertText": null,      "icon": "trackRegister" },
+      { "id": 2, "title": "צו 1",        "date": "15.06.26", "status": "completed", "editable": false, "alertText": null,      "icon": "trackOrder" },
+      { "id": 3, "title": "יום הדמיה",   "date": "01.07.26", "status": "completed", "editable": false, "alertText": null,      "icon": "trackScreen" },
+      { "id": 4, "title": "שאלון גנדום", "date": "15.07.26", "status": "alert",     "editable": false, "alertText": "לא הגיע", "icon": "trackForm" },
+      { "id": 5, "title": "גיוס",        "date": "01.10.26", "status": "pending",   "editable": false, "alertText": null,      "icon": "trackDraft" }
+    ],
+    "indications": [
+      { "id": 1, "label": "צו 12",        "date": "01/06/26",   "status": "active",   "statusLabel": "פעיל", "tzav12": true },
+      { "id": 2, "label": "עולה חדש",     "date": "01.06.2026", "status": "active",   "statusLabel": "פעיל" },
+      { "id": 3, "label": "בדיקה רפואית", "date": "05.06.2026", "status": "pending",  "statusLabel": "בתהליך" },
+      { "id": 4, "label": "רישום פלילי",  "date": "10.06.2026", "status": "approved", "statusLabel": "מאושר", "alert": true },
+      { "id": 5, "label": "ספורטאית",     "date": "15.06.2026", "status": "active",   "statusLabel": "פעיל" }
+    ],
+    "hasPendingIndications": true,
+    "tasksTotal": 8,
+    "tasks": [
+      { "id": 1, "title": "לסיור מחנה חינוך",    "date": "01.07.2026", "daysLeft": 3,    "type": "סיירת",  "status": "לא התייצב", "statusType": "purple" },
+      { "id": 2, "title": "לבדיקת גיוס ישיר",    "date": "05.07.2026", "daysLeft": 5,    "type": "סיירת",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 3, "title": "לקצין שיוך",           "date": "10.07.2026", "daysLeft": null, "type": "סיירת",  "status": "בתהליך",    "statusType": "warning" },
+      { "id": 4, "title": "שאלון רפואי",          "date": "12.07.2026", "daysLeft": null, "type": "בריאות", "status": "בוצע",      "statusType": "success" },
+      { "id": 5, "title": "ביקור ועדה",           "date": "15.07.2026", "daysLeft": 7,    "type": "ועדה",   "status": "לא התייצב", "statusType": "purple" },
+      { "id": 6, "title": "אישור מסמכים",         "date": "18.07.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" },
+      { "id": 7, "title": "ראיון קצין",           "date": "20.07.2026", "daysLeft": 10,   "type": "ראיון",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 8, "title": "מבחן פסיכוטכני",       "date": "25.07.2026", "daysLeft": 15,   "type": "מבחן",   "status": "לא בוצע",   "statusType": "danger" }
+    ],
+    "reportsTotal": 10,
+    "reportsOverdue": 5,
+    "reportsAlert": "דיווח לפני 1.6 על 1.6 ועבר",
+    "reports": [
+      { "id": 1,  "title": "ביקור בית",        "date": "01.06.2026", "daysLeft": null, "type": "סיירת",  "status": "בוצע",      "statusType": "success" },
+      { "id": 2,  "title": "שיחת טלפון",       "date": "03.06.2026", "daysLeft": null, "type": "סיירת",  "status": "בוצע",      "statusType": "success" },
+      { "id": 3,  "title": "פגישה בלשכה",      "date": "06.06.2026", "daysLeft": null, "type": "סיירת",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 4,  "title": "דיווח שטח",        "date": "10.06.2026", "daysLeft": null, "type": "סיירת",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 5,  "title": "שיחה עם ההורים",   "date": "12.06.2026", "daysLeft": null, "type": "סיירת",  "status": "בתהליך",    "statusType": "warning" },
+      { "id": 6,  "title": "דיווח ועדה",       "date": "15.06.2026", "daysLeft": null, "type": "ועדה",   "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 7,  "title": "עדכון תיק",        "date": "18.06.2026", "daysLeft": null, "type": "מנהלי",  "status": "בוצע",      "statusType": "success" },
+      { "id": 8,  "title": "ריאיון ראשוני",    "date": "20.06.2026", "daysLeft": null, "type": "ראיון",  "status": "לא בוצע",   "statusType": "danger" },
+      { "id": 9,  "title": "בדיקה רפואית",     "date": "22.06.2026", "daysLeft": null, "type": "בריאות", "status": "בוצע",      "statusType": "success" },
+      { "id": 10, "title": "דיווח סיום שלב",   "date": "25.06.2026", "daysLeft": null, "type": "מנהלי",  "status": "לא בוצע",   "statusType": "danger" }
+    ],
+    "comment": "מועמדת מורכבת עם צו 12 ורישום פלילי. דורשת מעקב צמוד מכל הגורמים.",
+    "personalDetails": {
+      "hebrewAge": "16.4",
+      "birthDate": "15.12.09",
+      "birthDateHebrew": "(16.3) 15.12.09",
+      "status": "בצו 12 + בתהליך",
+      "statusReason": "ממתינה לבדיקות ולאישור ביטחוני",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "מיון מתקדם",
+      "citizenship": "ישראל, רוסיה",
+      "citizenshipBadge": "עולה חדש",
+      "religion": "יהודית",
+      "maritalStatus": "רווקה",
+      "city": "אשדוד",
+      "fatherName": "עמוס גולדשטיין",
+      "fatherPhone": "050-9990011",
+      "motherName": "נעמה גולדשטיין",
+      "motherPhone": "050-1122334",
+      "grade": "י\"א 2",
+      "school": "תיכון מקיף, אשדוד"
+    }
+  },
+  {
+    "id": "037691234",
+    "name": "ואדים פטרוב",
+    "school": "תיכון יובל פתח תקווה",
+    "email": "vadim.p@gmail.com",
+    "phone": "050-7691234",
+    "testDescription": "אינדיקציה אחת בלבד (פעילה). צפוי: באבל אחד ללא +X chip, ללא באנרים.",
+    "headerStats": [
+      { "label": "תאריך ציון הבא", "value": "01.11.10", "sub": "09:00:00" },
+      { "label": "זמן בתהליך",     "value": "09:00",    "sub": "01.11.10" },
+      { "label": "תשלום",          "value": "₪5,000",   "sub": null }
+    ],
+    "relatedPeople": [
+      { "id": 1, "name": "פטרוב איגור", "relation": "אב", "location": "פתח תקווה", "ageGroup": "אמצע", "unit": "יחיד", "status": "פעיל" }
+    ],
+    "recruitmentTrack": [
+      { "id": 1, "title": "הרשמה",       "date": "01.08.26", "status": "completed", "editable": true,  "alertText": null, "icon": "trackRegister" },
+      { "id": 2, "title": "צו 1",        "date": "15.08.26", "status": "upcoming",  "editable": false, "alertText": null, "icon": "trackOrder" },
+      { "id": 3, "title": "יום הדמיה",   "date": "01.09.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackScreen" },
+      { "id": 4, "title": "שאלון גנדום", "date": "15.09.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackForm" },
+      { "id": 5, "title": "גיוס",        "date": "01.12.26", "status": "pending",   "editable": false, "alertText": null, "icon": "trackDraft" }
+    ],
+    "indications": [
+      { "id": 1, "label": "בן ממשיך", "date": "01.08.2026", "status": "active", "statusLabel": "פעיל" }
+    ],
+    "tasksTotal": 2,
+    "tasks": [
+      { "id": 1, "title": "הנחיות לגיוס",  "date": "10.08.2026", "daysLeft": 5,    "type": "סיירת",  "status": "בתהליך",  "statusType": "warning" },
+      { "id": 2, "title": "שאלון רפואי",   "date": "15.08.2026", "daysLeft": null, "type": "בריאות", "status": "לא בוצע", "statusType": "danger" }
+    ],
+    "reportsTotal": 2,
+    "reportsOverdue": 0,
+    "reportsAlert": null,
+    "reports": [
+      { "id": 1, "title": "ביקור בית",  "date": "01.08.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" },
+      { "id": 2, "title": "שיחת טלפון", "date": "05.08.2026", "daysLeft": null, "type": "סיירת", "status": "בוצע",    "statusType": "success" }
+    ],
+    "comment": "מועמד חדש בתחילת תהליך. בן ממשיך – יש לוודא אישורים.",
+    "personalDetails": {
+      "hebrewAge": "17.3",
+      "birthDate": "20.01.09",
+      "birthDateHebrew": "(17.2) 20.01.09",
+      "status": "ממתין לצו ראשון",
+      "statusReason": "טרם הוזמן ליום הדמיה",
+      "candidateRange": "טווח מועמד",
+      "candidateRangeValue": "טרום מיון",
+      "citizenship": "ישראל",
+      "citizenshipBadge": null,
+      "religion": "יהודי",
+      "maritalStatus": "רווק",
+      "city": "פתח תקווה",
+      "fatherName": "איגור פטרוב",
+      "fatherPhone": "050-2233445",
+      "motherName": "אולגה פטרוב",
+      "motherPhone": "050-5566778",
+      "grade": "י\"ב 3",
+      "school": "תיכון יובל, פתח תקווה"
+    }
   }
   ],
   "searchResults": {
@@ -389,11 +830,11 @@
       ],
       "missionData": {
         "indicators": [
-          { "label": "צו 12", "count": 14 },
-          { "label": "פקודת מעצר", "count": 14 },
-          { "label": "נפ\"א בנמ\"ש", "count": 4 },
-          { "label": "תתקדמו", "count": 6, "active": true },
-          { "label": "עולים", "count": 6 }
+          { "label": "צו 12", "count": 14, "description": "מועמד שקיבל צו 12 להתייצבות לשירות ביטחון. יש לוודא התייצבות במועד ולעקוב אחר סטאטוס התהליך." },
+          { "label": "פקודת מעצר", "count": 14, "description": "מועמד עם פקודת מעצר פעילה. יש לתאם את הטיפול במועמד לנהלים המקובלים ולדווח למפקד המשטרה." },
+          { "label": "נפ\"א בנמ\"ש", "count": 4, "description": "מועמד שנמצא בנפת אדם בנמשך. יש לבצע הערכת מצב מקיפה ולפעול בהתאם לנהלים." },
+          { "label": "תתקדמו", "count": 6, "active": true, "description": "מועמד בתכנית תתקדמו – תכנית קידום מוקדם למועמדים עם קשיים בתהליך הגיוס. יש לוודא השלמת משימות." },
+          { "label": "עולים", "count": 6, "description": "מועמד עולה חדש. יש לוודא התאמה לשפה ולסייע בקליטה למערכת." }
         ],
         "grades": {
           "all": {
@@ -497,11 +938,11 @@
       ],
       "missionData": {
         "indicators": [
-          { "label": "צו 12", "count": 10 },
-          { "label": "פקודת מעצר", "count": 8 },
-          { "label": "נפ\"א בנמ\"ש", "count": 3 },
-          { "label": "תתקדמו", "count": 4, "active": true },
-          { "label": "עולים", "count": 5 }
+          { "label": "צו 12", "count": 10, "description": "מועמד שקיבל צו 12 להתייצבות לשירות ביטחון. יש לוודא התייצבות במועד ולעקוב אחר סטאטוס התהליך." },
+          { "label": "פקודת מעצר", "count": 8, "description": "מועמד עם פקודת מעצר פעילה. יש לתאם את הטיפול במועמד לנהלים המקובלים ולדווח למפקד המשטרה." },
+          { "label": "נפ\"א בנמ\"ש", "count": 3, "description": "מועמד שנמצא בנפת אדם בנמשך. יש לבצע הערכת מצב מקיפה ולפעול בהתאם לנהלים." },
+          { "label": "תתקדמו", "count": 4, "active": true, "description": "מועמד בתכנית תתקדמו – תכנית קידום מוקדם למועמדים עם קשיים בתהליך הגיוס. יש לוודא השלמת משימות." },
+          { "label": "עולים", "count": 5, "description": "מועמד עולה חדש. יש לוודא התאמה לשפה ולסייע בקליטה למערכת." }
         ],
         "grades": {
           "all": {
@@ -619,11 +1060,11 @@
       ],
       "missionData": {
         "indicators": [
-          { "label": "צו 12", "count": 12 },
-          { "label": "פקודת מעצר", "count": 11 },
-          { "label": "נפ\"א בנמ\"ש", "count": 5 },
-          { "label": "תתקדמו", "count": 7, "active": true },
-          { "label": "עולים", "count": 3 }
+          { "label": "צו 12", "count": 12, "description": "מועמד שקיבל צו 12 להתייצבות לשירות ביטחון. יש לוודא התייצבות במועד ולעקוב אחר סטאטוס התהליך." },
+          { "label": "פקודת מעצר", "count": 11, "description": "מועמד עם פקודת מעצר פעילה. יש לתאם את הטיפול במועמד לנהלים המקובלים ולדווח למפקד המשטרה." },
+          { "label": "נפ\"א בנמ\"ש", "count": 5, "description": "מועמד שנמצא בנפת אדם בנמשך. יש לבצע הערכת מצב מקיפה ולפעול בהתאם לנהלים." },
+          { "label": "תתקדמו", "count": 7, "active": true, "description": "מועמד בתכנית תתקדמו – תכנית קידום מוקדם למועמדים עם קשיים בתהליך הגיוס. יש לוודא השלמת משימות." },
+          { "label": "עולים", "count": 3, "description": "מועמד עולה חדש. יש לוודא התאמה לשפה ולסייע בקליטה למערכת." }
         ],
         "grades": {
           "all": {

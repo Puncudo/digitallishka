@@ -293,6 +293,9 @@ function closeMissionDetail() {
   selectedMission.value = null
 }
 
+// Indicator info drawer
+const indicatorInfoOpen = ref(false)
+
 function toggleIndicator(label) {
   const s = new Set(activeIndicators.value)
   if (s.has(label)) {
@@ -560,6 +563,19 @@ const missionStudentCounts = computed(() => {
               {{ ind.label }} {{ ind.count }}
             </div>
           </div>
+          <div class="indicator-actions">
+          <button
+            class="more-info-btn"
+            :style="{ visibility: activeIndicators.size > 0 ? 'visible' : 'hidden' }"
+            @click="indicatorInfoOpen = true"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10.5" stroke="#6D6E8D" stroke-width="1.5"/>
+              <path d="M12 7.5v.5" stroke="#6D6E8D" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 11v6" stroke="#6D6E8D" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>מידע נוסף</span>
+          </button>
           <button
             class="clear-filters-btn"
             :style="{ visibility: activeIndicators.size > 0 ? 'visible' : 'hidden' }"
@@ -567,6 +583,7 @@ const missionStudentCounts = computed(() => {
           >
             נקה סינונים
           </button>
+          </div>
         </div>
 
         <!-- Status / Students toggle -->
@@ -1021,6 +1038,20 @@ const missionStudentCounts = computed(() => {
               <div class="dates-date">{{ selectedSchool?.tzvBtzvata?.date }}</div>
               <div class="dates-label">צו אחוד - בנות</div>
             </div>
+    </BaseDrawer>
+
+    <!-- Indicator Info Drawer -->
+    <BaseDrawer v-model="indicatorInfoOpen" title="מידע נוסף על אינדיקציות">
+      <div class="ind-info-content">
+        <div
+          v-for="(ind, i) in currentMissionData.indicators"
+          :key="i"
+          class="ind-info-item"
+        >
+          <div class="ind-info-title">{{ ind.label }}</div>
+          <div class="ind-info-desc">{{ ind.description }}</div>
+        </div>
+      </div>
     </BaseDrawer>
 
     <!-- Mission Detail Overlay -->
@@ -1732,6 +1763,72 @@ const missionStudentCounts = computed(() => {
   text-decoration: underline;
   -webkit-tap-highlight-color: transparent;
   min-height: 0;
+}
+
+.indicator-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.more-info-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 0px 0px 4px;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.more-info-btn span {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: right;
+  text-decoration: underline;
+  color: #2F305C;
+}
+
+.ind-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 20px 30px 30px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.ind-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ind-info-title {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: right;
+  color: #5D87FF;
+}
+
+.ind-info-desc {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: right;
+  color: #2F305C;
 }
 
 .indicator-pill {

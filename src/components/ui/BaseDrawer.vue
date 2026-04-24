@@ -16,6 +16,15 @@
           >
             <div class="bd-handle" />
           </div>
+          <div v-if="title" class="bd-header">
+            <span class="bd-title">{{ title }}</span>
+            <button class="bd-close-btn" @click="close">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <line x1="6" y1="6" x2="16" y2="16" stroke="#5D87FF" stroke-width="2" stroke-linecap="round"/>
+                <line x1="16" y1="6" x2="6" y2="16" stroke="#5D87FF" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
           <slot />
         </div>
       </div>
@@ -27,7 +36,8 @@
 import { ref, computed, watch, nextTick } from 'vue'
 
 const props = defineProps({
-  modelValue: { type: Boolean, required: true }
+  modelValue: { type: Boolean, required: true },
+  title: { type: String, default: '' }
 })
 const emit = defineEmits(['update:modelValue'])
 
@@ -54,10 +64,11 @@ function getContainerHeight() {
 }
 
 const sheetStyle = computed(() => {
-  if (currentHeight.value <= 0) return { height: '0px' }
+  const t = dragging.value ? 'none' : 'height 0.3s ease'
+  if (currentHeight.value <= 0) return { height: '0px', transition: t }
   return {
     height: currentHeight.value + 'px',
-    transition: dragging.value ? 'none' : 'height 0.3s ease',
+    transition: t,
   }
 })
 
@@ -222,6 +233,37 @@ watch(show, (val) => {
   height: 4px;
   background: #D5D6DE;
   border-radius: 100px;
+}
+
+.bd-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 22px;
+  border-bottom: 1px solid #EAEDEF;
+  box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.bd-title {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  color: #5D87FF;
+}
+
+.bd-close-btn {
+  width: 32px;
+  height: 32px;
+  background: #E9EFFF;
+  border: 0.9px solid #F6F7FC;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* Transition — overlay fades, sheet slides */

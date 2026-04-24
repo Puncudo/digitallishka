@@ -2,13 +2,18 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  indications: { type: Array, required: true }
+  indications: { type: Array, required: true },
+  hasPendingIndications: { type: Boolean, default: false },
+  hasSecretIndications: { type: Boolean, default: false }
 })
 
-// Show first 3, rest hidden behind "+X" chip
+const emit = defineEmits(['show-all'])
+
+// Only show active indications in blue chips
+const activeIndications = computed(() => props.indications.filter(i => i.status === 'active' && !i.tzav12))
 const VISIBLE_COUNT = 3
-const visibleChips  = computed(() => props.indications.slice(0, VISIBLE_COUNT))
-const hiddenCount   = computed(() => Math.max(0, props.indications.length - VISIBLE_COUNT))
+const visibleChips  = computed(() => activeIndications.value.slice(0, VISIBLE_COUNT))
+const hiddenCount   = computed(() => Math.max(0, activeIndications.value.length - VISIBLE_COUNT))
 </script>
 
 <template>
@@ -17,14 +22,27 @@ const hiddenCount   = computed(() => Math.max(0, props.indications.length - VISI
     <!-- Title -->
     <div class="ind-title">אינדיקציות</div>
 
-    <!-- Info row: text first (→ RIGHT in RTL), icon second (→ LEFT of text) -->
-    <div class="ind-info">
+    <!-- Secret indications info row -->
+    <div v-if="hasSecretIndications" class="ind-info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="info-icon" flex-shrink="0">
         <circle cx="12" cy="12" r="10.5" stroke="rgba(47,48,92,0.7)" stroke-width="1.5"/>
         <path d="M12 7.5v.5" stroke="rgba(47,48,92,0.7)" stroke-width="2" stroke-linecap="round"/>
         <path d="M12 11v6" stroke="rgba(47,48,92,0.7)" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <span class="ind-info__text">קיימות אינדיקציות נוספות שאינן מוצגות בתצוגה זו</span>
+    </div>
+
+    <!-- Pending indications row -->
+    <div v-if="hasPendingIndications" class="ind-info ind-info--pending" @click="emit('show-all')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="info-icon">
+        <circle cx="12" cy="12" r="10.5" stroke="rgba(47,48,92,0.7)" stroke-width="1.5"/>
+        <path d="M12 7.5v.5" stroke="rgba(47,48,92,0.7)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 11v6" stroke="rgba(47,48,92,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="ind-info__text">קיימות אינדצקיות בתהליך למלש"ב</span>
+      <svg width="5" height="10" viewBox="0 0 5 10" fill="none" class="ind-arrow">
+        <path d="M4 1L1 5L4 9" stroke="#5D87FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
 
     <!-- Chips: visible first (→ appear on RIGHT in RTL), "+X" last (→ appears on FAR LEFT) -->
@@ -35,7 +53,7 @@ const hiddenCount   = computed(() => Math.max(0, props.indications.length - VISI
         class="chip chip--regular"
       >{{ ind.label }}</div>
 
-      <div v-if="hiddenCount > 0" class="chip chip--more">+{{ hiddenCount }}</div>
+      <div v-if="hiddenCount > 0" class="chip chip--more" @click="emit('show-all')">+{{ hiddenCount }}</div>
     </div>
 
     <!-- Desktop: table view -->
@@ -107,6 +125,14 @@ const hiddenCount   = computed(() => Math.max(0, props.indications.length - VISI
   color: #2F305C;
   opacity: 0.7;
 ;
+}
+
+.ind-info--pending {
+  cursor: pointer;
+}
+
+.ind-arrow {
+  flex-shrink: 0;
 }
 
 /* ── Chips row ── */

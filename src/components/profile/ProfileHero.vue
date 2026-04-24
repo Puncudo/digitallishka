@@ -7,6 +7,8 @@ const props = defineProps({
   candidate: { type: Object, required: true }
 })
 
+defineEmits(['arrow-click'])
+
 const store = useAppStore()
 const favorited = computed(() => store.isFavorite(props.candidate.id))
 </script>
@@ -110,7 +112,10 @@ const favorited = computed(() => store.isFavorite(props.candidate.id))
 .hero-mobile {
   background: linear-gradient(275.24deg, #5C6BF3 -1.99%, #4389F7 38.29%, #1FB5FB 88.96%, #00D9FF 99.75%);
   position: relative;
-  padding: 24px 0 0;
+  height: 92px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   color: #fff;
 }
 
@@ -177,7 +182,6 @@ const favorited = computed(() => store.isFavorite(props.candidate.id))
   color: rgba(255, 255, 255, 0.9);
   text-align: center;
 }
-
 
 /* ── Desktop ── */
 .hero-desktop {

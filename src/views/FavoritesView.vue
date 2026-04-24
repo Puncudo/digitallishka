@@ -51,6 +51,11 @@ function callPhone(phone) {
           </button>
         </div>
 
+        <!-- Test description -->
+        <div v-if="store.showTestInfo && candidate.testDescription" class="fav-card__test">
+          {{ candidate.testDescription }}
+        </div>
+
         <!-- Bottom row: action buttons -->
         <div class="fav-card__actions">
           <button class="action-btn action-btn--whatsapp" @click.stop="openWhatsApp(candidate.phone)" aria-label="וואטסאפ">
@@ -82,6 +87,19 @@ function callPhone(phone) {
   flex: 1;
   background: #FFFFFF;
   padding: 20px 0;
+}
+
+
+.fav-card__test {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  color: #856404;
+  background: #FFF3CD;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .favorites-list {
@@ -137,6 +155,7 @@ function callPhone(phone) {
 
 .fav-card__info {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -150,6 +169,10 @@ function callPhone(phone) {
   line-height: 20px;
   text-align: right;
   color: #2F305C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .fav-card__school {
@@ -159,6 +182,10 @@ function callPhone(phone) {
   line-height: 20px;
   text-align: right;
   color: #6D6E8D;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Actions */

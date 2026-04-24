@@ -1,8 +1,19 @@
 <script setup>
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useAppStore } from '@/stores/useAppStore'
 import AppSidebar   from './AppSidebar.vue'
 import MobileHeader from './MobileHeader.vue'
 import BottomNav    from './BottomNav.vue'
 import InstallPrompt from '../ui/InstallPrompt.vue'
+
+const route = useRoute()
+const store = useAppStore()
+const pageContent = ref(null)
+
+watch(() => route.path, () => {
+  if (pageContent.value) pageContent.value.scrollTop = 0
+})
 </script>
 
 <template>
@@ -25,7 +36,7 @@ import InstallPrompt from '../ui/InstallPrompt.vue'
         <div class="topbar-user">נ</div>
       </header>
 
-      <main class="page-content">
+      <main ref="pageContent" class="page-content">
         <slot />
       </main>
     </div>
@@ -33,6 +44,11 @@ import InstallPrompt from '../ui/InstallPrompt.vue'
     <!-- mobile only -->
     <BottomNav />
     <InstallPrompt />
+
+    <!-- Test toggle -->
+    <button class="test-toggle-float" :class="{ 'test-toggle-float--active': store.showTestInfo }" @click="store.toggleTestInfo()">
+      🧪
+    </button>
   </div>
 </template>
 
@@ -57,5 +73,31 @@ import InstallPrompt from '../ui/InstallPrompt.vue'
   flex-direction: column;
   overflow-y: auto;
   padding-bottom: var(--bottom-nav-h);
+}
+
+.test-toggle-float {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-h, 60px) + 12px);
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #FFD16A;
+  background: #FFF3CD;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0.6;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.test-toggle-float--active {
+  opacity: 1;
+  box-shadow: 0 0 0 3px rgba(255, 209, 106, 0.5);
 }
 </style>

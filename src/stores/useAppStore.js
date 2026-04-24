@@ -2,11 +2,17 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useAppStore = defineStore('app', () => {
-  const favorites   = ref(new Set(['031697151', '029834521', '029876543']))
+  const favorites   = ref(new Set(['031697151', '029834521', '029876543', '032145678', '033256789', '034367891', '035478912', '036589123', '037691234']))
   const trackIndex  = ref(1)
   const activeTab   = ref('tasks')
   const currentPage = ref(1)
   const pageSize    = ref(7)
+  const showTestInfo = ref(localStorage.getItem('showTestInfo') === 'true')
+
+  function toggleTestInfo() {
+    showTestInfo.value = !showTestInfo.value
+    localStorage.setItem('showTestInfo', showTestInfo.value)
+  }
 
   function isFavorite(id)    { return favorites.value.has(id) }
   function toggleFavorite(id) {
@@ -21,6 +27,6 @@ export const useAppStore = defineStore('app', () => {
   function setActiveTab(tab) { activeTab.value = tab; currentPage.value = 1 }
   function setPage(p)        { currentPage.value = p }
 
-  return { favorites, trackIndex, activeTab, currentPage, pageSize,
-           isFavorite, toggleFavorite, setTrackIndex, setActiveTab, setPage }
+  return { favorites, trackIndex, activeTab, currentPage, pageSize, showTestInfo,
+           isFavorite, toggleFavorite, setTrackIndex, setActiveTab, setPage, toggleTestInfo }
 })
