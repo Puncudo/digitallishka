@@ -145,7 +145,7 @@ function shrinkOut(cb) {
   const fc = figCenter.value
   if (!fl || !fr || !fc) return
 
-  const base = 'position:absolute;bottom:0;left:50%;width:90px;height:180px;z-index:2;transform-origin:bottom center;'
+  const base = 'position:absolute;bottom:0;left:50%;width:22.5%;max-width:90px;height:50%;z-index:2;transform-origin:bottom center;'
   const trans = 'transition:transform 0.7s cubic-bezier(0.4,0,0.6,1),opacity 0.5s ease;'
 
   fl.style.cssText = base + trans + 'opacity:0;transform:translate(-45px,0px) rotate(0deg) scale(0);'
@@ -165,7 +165,7 @@ function peekIn(cb) {
   const fc = figCenter.value
   if (!fl || !fr || !fc) return
 
-  const base = 'position:absolute;bottom:0;left:50%;width:90px;height:180px;z-index:2;transform-origin:bottom center;'
+  const base = 'position:absolute;bottom:0;left:50%;width:22.5%;max-width:90px;height:50%;z-index:2;transform-origin:bottom center;'
 
   fc.style.transition = 'none'
   fc.style.transform = 'translateX(-50%)'
@@ -197,7 +197,7 @@ function replay() {
   const crHead = getClipEl('clip-head')
   if (!crBody || !crArms || !crHead) return
 
-  const base = 'position:absolute;bottom:0;left:50%;width:90px;height:180px;z-index:2;transform-origin:bottom center;'
+  const base = 'position:absolute;bottom:0;left:50%;width:22.5%;max-width:90px;height:50%;z-index:2;transform-origin:bottom center;'
 
   // Reset
   fc.style.transition = 'none'
@@ -300,7 +300,7 @@ onBeforeUnmount(() => {
   width: 100%; height: 100%;
   overflow: visible;
   pointer-events: none;
-  transform: translate(79px, -32px) scale(1.65);
+  transform: translate(20%, -4%) scale(1.65);
 }
 
 @keyframes rotCircle1 {
@@ -341,28 +341,30 @@ onBeforeUnmount(() => {
 /* ═══ Figures stage ═══ */
 .figures-stage {
   position: absolute;
-  top: 80px;
+  top: 9.5%;
   left: 0; right: 0;
-  height: 360px;
+  height: 42.6%;
   z-index: 3;
 }
 .figures-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transform: translate(-10px, -127px) scale(1.25);
+  transform: translate(-2.5%, -35%) scale(1.25);
 }
 .fig { position: absolute; bottom: 0; }
 .fig-center {
-  width: 120px;
+  width: 30%;
+  max-width: 120px;
   left: 50%;
   transform: translateX(-50%);
-  height: 240px;
+  height: 66%;
   z-index: 3;
 }
 .fig-left, .fig-right {
-  width: 90px;
-  height: 180px;
+  width: 22.5%;
+  max-width: 90px;
+  height: 50%;
   left: 50%;
   z-index: 2;
   opacity: 0;
@@ -393,7 +395,7 @@ onBeforeUnmount(() => {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 38%;
+  bottom: 37%;
   font-family: 'Noto Sans Hebrew', sans-serif;
   font-size: 40px;
   font-weight: 500;
@@ -408,7 +410,7 @@ onBeforeUnmount(() => {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 28%;
+  bottom: 26%;
   font-family: 'Rubik', 'Heebo', sans-serif;
   font-size: 94px;
   font-weight: 300;
@@ -422,8 +424,8 @@ onBeforeUnmount(() => {
 /* ═══ Logos — top-right corner, vertically centered row ═══ */
 .logos-row {
   position: absolute;
-  top: 14px;
-  right: 30px;
+  top: 1.7%;
+  right: 7.5%;
   display: flex;
   align-items: center;
   gap: 0px;
@@ -450,7 +452,8 @@ onBeforeUnmount(() => {
   left: 50%;
   transform: translateX(-50%);
   bottom: 8.8%;
-  width: 275px;
+  width: 70%;
+  max-width: 275px;
   height: 45px;
   padding: 0;
   border: none;
