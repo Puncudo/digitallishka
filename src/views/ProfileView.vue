@@ -314,6 +314,7 @@ onMounted(() => {
       <ContentTabs
         :tasks="candidate.tasks"
         :reports="candidate.reports"
+        :quality-data="candidate.qualityData"
         :tasks-total="candidate.tasksTotal"
         :reports-total="candidate.reportsTotal"
         :reports-overdue="candidate.reportsOverdue"

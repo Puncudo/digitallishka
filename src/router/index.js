@@ -5,6 +5,10 @@ import SearchView      from '@/views/SearchView.vue'
 import FavoritesView   from '@/views/FavoritesView.vue'
 import HomeView        from '@/views/HomeView.vue'
 import IntroView       from '@/views/IntroView.vue'
+import RegistrationView from '@/views/RegistrationView.vue'
+import RegistrationSuccessView from '@/views/RegistrationSuccessView.vue'
+import PermissionsView from '@/views/PermissionsView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const routes = [
   {
@@ -26,6 +30,10 @@ const routes = [
   { path: '/reports',             component: PlaceholderView, meta: { title: 'דיווחים' } },
   { path: '/issue',               component: PlaceholderView, meta: { title: 'דווח על בעיה' } },
   { path: '/settings',            component: PlaceholderView, meta: { title: 'הגדרות' } },
+  { path: '/registration',         component: RegistrationView },
+  { path: '/registration-success', component: RegistrationSuccessView },
+  { path: '/permissions',          component: PermissionsView },
+  { path: '/not-found',             component: NotFoundView },
 ]
 
 export default createRouter({

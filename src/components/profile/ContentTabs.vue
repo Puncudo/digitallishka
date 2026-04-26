@@ -8,6 +8,7 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 const props = defineProps({
   tasks:          { type: Array,  required: true },
   reports:        { type: Array,  required: true },
+  qualityData:    { type: Object, default: null },
   invTotal:       { type: Number, required: true },
   tasksTotal:     { type: Number, required: true },
   reportsTotal:   { type: Number, required: true },
@@ -75,14 +76,14 @@ const TASK_ICONS = {
           :class="{ active: activeTab === 'reports' }"
           @click="store.setActiveTab('reports')"
         >
-          <span class="tab-label">דיווחים ({{ reportsTotal }})</span>
+          <span class="tab-label">נתוני איכות</span>
           <div class="tab-bar" />
         </button>
       </div>
     </div>
 
     <!-- ── Meta row ── -->
-    <div class="meta-row">
+    <div v-if="activeTab !== 'reports'" class="meta-row">
       <!-- Right (first in DOM = right in RTL): progress text -->
       <div class="meta-progress">
         {{ completedCount }}/{{ total }} {{ activeTab === 'tasks' ? 'משימות' : 'דיווחים' }} הושלמו
@@ -95,7 +96,7 @@ const TASK_ICONS = {
     </div>
 
     <!-- ── Column headers ── -->
-    <div class="col-header">
+    <div v-if="activeTab !== 'reports'" class="col-header">
       <!-- DOM order = visual right→left in RTL -->
       <div class="col-h col-h-name">שם {{ activeTab === 'tasks' ? 'משימה' : 'דיווח' }}</div>
       <div class="col-h col-h-date">תאריך יעד</div>
@@ -104,7 +105,7 @@ const TASK_ICONS = {
     </div>
 
     <!-- ── Data rows ── -->
-    <div class="rows-wrap">
+    <div v-if="activeTab !== 'reports'" class="rows-wrap">
       <div v-if="pagedItems.length === 0" class="empty-row">אין פריטים להצגה</div>
       <div v-for="item in pagedItems" :key="item.id" class="data-row">
         <div class="row-inner">
@@ -131,7 +132,7 @@ const TASK_ICONS = {
     </div>
 
     <!-- ── Desktop table (hidden on mobile) ── -->
-    <div class="table-scroll">
+    <div v-if="activeTab !== 'reports'" class="table-scroll">
       <table class="data-table">
         <thead>
           <tr>
@@ -176,11 +177,68 @@ const TASK_ICONS = {
     </div>
 
     <BasePagination
+      v-if="activeTab !== 'reports'"
       :total="total"
       :current-page="currentPage"
       :page-size="pageSize"
       @change="store.setPage"
     />
+
+    <!-- ── Quality Data (נתוני איכות) ── -->
+    <div v-if="activeTab === 'reports' && qualityData" class="quality-wrap">
+      <!-- Basic metrics -->
+      <div class="quality-section">
+        <div class="quality-section-title">נתונים כלליים</div>
+        <div class="quality-grid">
+          <div class="quality-item">
+            <span class="quality-label">דפ״ר</span>
+            <span class="quality-value">{{ qualityData.dapar }}</span>
+            <span v-if="qualityData.daparRepeat" class="pill pill-blue" style="margin-top: 4px">חוזר</span>
+          </div>
+          <div class="quality-item">
+            <span class="quality-label">ראיון</span>
+            <span class="quality-value" v-if="qualityData.interview">
+              <span class="pill pill-green">כן</span>
+            </span>
+            <span class="quality-value" v-else>
+              <span class="pill pill-red">לא</span>
+            </span>
+          </div>
+          <div class="quality-item">
+            <span class="quality-label">עברית</span>
+            <span class="quality-value">{{ qualityData.hebrewScore }}</span>
+          </div>
+          <div class="quality-item">
+            <span class="quality-label">פרופיל</span>
+            <span class="quality-value">{{ qualityData.profile }}</span>
+          </div>
+          <div class="quality-item">
+            <span class="quality-label">קה״ס</span>
+            <span class="quality-value">{{ qualityData.kahas }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- יום המא"ה tests -->
+      <div v-if="qualityData.yomHamaa && qualityData.yomHamaa.length" class="quality-section">
+        <div class="quality-section-title">
+          יום המא״ה
+          <span v-if="qualityData.yomHamaaDate" class="yom-date">{{ qualityData.yomHamaaDate }}</span>
+          <span v-if="qualityData.yomHamaa.every(t => t.score)" class="yom-status">
+            <span class="pill pill-green">הסתיים</span>
+          </span>
+          <span v-else class="yom-status">
+            <span class="pill pill-red">לא הסתיים</span>
+          </span>
+        </div>
+        <div class="quality-grid">
+          <div v-for="test in qualityData.yomHamaa" :key="test.name" class="quality-item">
+            <span class="quality-label">{{ test.name }}</span>
+            <span class="quality-value" :class="{ 'q-empty': !test.score }">{{ test.score || '—' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -384,4 +442,106 @@ const TASK_ICONS = {
 
 /* Desktop table: hidden on mobile */
 .table-scroll { display: none; }
+
+/* ── Quality Data ── */
+.quality-wrap {
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.quality-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+}
+.quality-section-title {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #3B82F6;
+  margin-bottom: 10px;
+  padding: 0 14px 3px;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.yom-status {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin-inline-start: auto;
+}
+.yom-date {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6D6E8D;
+  margin-inline-start: 8px;
+}
+.x-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+.pill {
+  display: inline-block;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 12px;
+  line-height: 1.4;
+}
+.pill-green {
+  background: rgba(46, 171, 80, 0.12);
+  color: #2EAB50;
+}
+.pill-red {
+  background: rgba(232, 84, 106, 0.12);
+  color: #E8546A;
+}
+.pill-blue {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3B82F6;
+}
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+.quality-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 10px;
+}
+.quality-item:only-child {
+  grid-column: 1 / -1;
+}
+.quality-label {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #6D6E8D;
+}
+.quality-value {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2F305C;
+}
+.quality-badge {
+  display: inline-block;
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 4px 12px;
+  white-space: nowrap;
+  line-height: 18px;
+}
+.q-empty {
+  color: rgba(47, 48, 92, 0.25);
+}
 </style>

@@ -455,6 +455,57 @@
         "grade": "י\"א 3",
         "school": "תיכון עירוני א', תל אביב"
       },
+      "qualityData": {
+        "dapar": "72",
+        "interview": true,
+        "hebrewScore": "85",
+        "profile": "64",
+        "kahas": "48",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "78"
+          },
+          {
+            "name": "אנגלית",
+            "score": "85"
+          },
+          {
+            "name": "עברית",
+            "score": "91"
+          },
+          {
+            "name": "פיזיקה",
+            "score": "70"
+          },
+          {
+            "name": "כימיה",
+            "score": "64"
+          },
+          {
+            "name": "ביולוגיה",
+            "score": "65"
+          },
+          {
+            "name": "היסטוריה",
+            "score": "80"
+          },
+          {
+            "name": "מחשבים",
+            "score": "73"
+          },
+          {
+            "name": "אזרחות",
+            "score": "72"
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": "88"
+          }
+        ],
+        "yomHamaaDate": "12.03.26",
+        "daparRepeat": true
+      },
       "gender": "M"
     },
     {
@@ -718,7 +769,57 @@
         "grade": "י\"ב 1",
         "school": "תיכון אזורי מועצה אזורית גזר"
       },
-      "gender": "M"
+      "gender": "M",
+      "qualityData": {
+        "dapar": "58",
+        "interview": false,
+        "hebrewScore": "72",
+        "profile": "56",
+        "kahas": "42",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "62"
+          },
+          {
+            "name": "אנגלית",
+            "score": "75"
+          },
+          {
+            "name": "עברית",
+            "score": "80"
+          },
+          {
+            "name": "פיזיקה",
+            "score": null
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": "68"
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": "71"
+          }
+        ],
+        "yomHamaaDate": "05.01.26"
+      }
     },
     {
       "id": "031245678",
@@ -907,7 +1008,57 @@
         }
       ],
       "comment": "מועמד בתהליך ראשוני. ממתין להשלמת צו ראשון.",
-      "gender": "M"
+      "gender": "M",
+      "qualityData": {
+        "dapar": "84",
+        "interview": true,
+        "hebrewScore": "90",
+        "profile": "72",
+        "kahas": "55",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "88"
+          },
+          {
+            "name": "אנגלית",
+            "score": "92"
+          },
+          {
+            "name": "עברית",
+            "score": "76"
+          },
+          {
+            "name": "פיזיקה",
+            "score": "81"
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": "90"
+          },
+          {
+            "name": "אזרחות",
+            "score": "84"
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "18.11.25"
+      }
     },
     {
       "id": "029876543",
@@ -1088,7 +1239,58 @@
         }
       ],
       "comment": "מועמדת מתקדמת. כל השלבים הושלמו בהצלחה. ממתינה לתאריך גיוס.",
-      "gender": "F"
+      "gender": "F",
+      "qualityData": {
+        "dapar": "45",
+        "interview": true,
+        "hebrewScore": "68",
+        "profile": "52",
+        "kahas": "38",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "55"
+          },
+          {
+            "name": "אנגלית",
+            "score": "60"
+          },
+          {
+            "name": "עברית",
+            "score": null
+          },
+          {
+            "name": "פיזיקה",
+            "score": null
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": "48"
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": null
+          },
+          {
+            "name": "אזרחות",
+            "score": "52"
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "22.02.26",
+        "daparRepeat": true
+      }
     },
     {
       "id": "031111222",
@@ -1215,7 +1417,57 @@
         }
       ],
       "comment": "מועמד חדש בתחילת תהליך.",
-      "gender": "M"
+      "gender": "M",
+      "qualityData": {
+        "dapar": "91",
+        "interview": true,
+        "hebrewScore": "95",
+        "profile": "82",
+        "kahas": "67",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "94"
+          },
+          {
+            "name": "אנגלית",
+            "score": "88"
+          },
+          {
+            "name": "עברית",
+            "score": "90"
+          },
+          {
+            "name": "פיזיקה",
+            "score": "96"
+          },
+          {
+            "name": "כימיה",
+            "score": "92"
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": "85"
+          },
+          {
+            "name": "מחשבים",
+            "score": null
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": "78"
+          }
+        ],
+        "yomHamaaDate": "30.12.25"
+      }
     },
     {
       "id": "028765432",
@@ -1411,7 +1663,58 @@
         }
       ],
       "comment": "מועמדת שהשלימה את כל התהליך בהצלחה מלאה.",
-      "gender": "F"
+      "gender": "F",
+      "qualityData": {
+        "dapar": "63",
+        "interview": false,
+        "hebrewScore": "77",
+        "profile": "61",
+        "kahas": "44",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "70"
+          },
+          {
+            "name": "אנגלית",
+            "score": "68"
+          },
+          {
+            "name": "עברית",
+            "score": null
+          },
+          {
+            "name": "פיזיקה",
+            "score": "73"
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": "65"
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "14.04.26",
+        "daparRepeat": true
+      }
     },
     {
       "id": "032145678",
@@ -1578,7 +1881,57 @@
         "grade": "י\"ב 2",
         "school": "תיכון הראל, חיפה"
       },
-      "gender": "M"
+      "gender": "M",
+      "qualityData": {
+        "dapar": "76",
+        "interview": true,
+        "hebrewScore": "83",
+        "profile": "68",
+        "kahas": "51",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "79"
+          },
+          {
+            "name": "אנגלית",
+            "score": "85"
+          },
+          {
+            "name": "עברית",
+            "score": "71"
+          },
+          {
+            "name": "פיזיקה",
+            "score": "77"
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": "82"
+          },
+          {
+            "name": "מחשבים",
+            "score": null
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": "74"
+          }
+        ],
+        "yomHamaaDate": "08.09.25"
+      }
     },
     {
       "id": "033256789",
@@ -1807,7 +2160,57 @@
         "grade": "י\"א 1",
         "school": "תיכון הרצליה, תל אביב"
       },
-      "gender": "M"
+      "gender": "M",
+      "qualityData": {
+        "dapar": "52",
+        "interview": false,
+        "hebrewScore": "65",
+        "profile": "48",
+        "kahas": "35",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "58"
+          },
+          {
+            "name": "אנגלית",
+            "score": "63"
+          },
+          {
+            "name": "עברית",
+            "score": null
+          },
+          {
+            "name": "פיזיקה",
+            "score": null
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": "55"
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "25.03.26"
+      }
     },
     {
       "id": "034367891",
@@ -2002,7 +2405,58 @@
         "grade": "י\"ב 1",
         "school": "תיכון בילו, ירושלים"
       },
-      "gender": "F"
+      "gender": "F",
+      "qualityData": {
+        "dapar": "88",
+        "interview": true,
+        "hebrewScore": "91",
+        "profile": "75",
+        "kahas": "60",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "86"
+          },
+          {
+            "name": "אנגלית",
+            "score": "90"
+          },
+          {
+            "name": "עברית",
+            "score": "84"
+          },
+          {
+            "name": "פיזיקה",
+            "score": "89"
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": "78"
+          },
+          {
+            "name": "מחשבים",
+            "score": null
+          },
+          {
+            "name": "אזרחות",
+            "score": "82"
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "17.06.25",
+        "daparRepeat": true
+      }
     },
     {
       "id": "035478912",
@@ -2230,7 +2684,57 @@
         "grade": "י\"א 4",
         "school": "תיכון אמית, נתניה"
       },
-      "gender": "F"
+      "gender": "F",
+      "qualityData": {
+        "dapar": "69",
+        "interview": true,
+        "hebrewScore": "79",
+        "profile": "58",
+        "kahas": "46",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "72"
+          },
+          {
+            "name": "אנגלית",
+            "score": "78"
+          },
+          {
+            "name": "עברית",
+            "score": null
+          },
+          {
+            "name": "פיזיקה",
+            "score": "66"
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": "70"
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "03.02.26"
+      }
     },
     {
       "id": "036589123",
@@ -2555,7 +3059,57 @@
         "grade": "י\"א 2",
         "school": "תיכון מקיף, אשדוד"
       },
-      "gender": "F"
+      "gender": "F",
+      "qualityData": {
+        "dapar": "55",
+        "interview": false,
+        "hebrewScore": "71",
+        "profile": "50",
+        "kahas": "40",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "60"
+          },
+          {
+            "name": "אנגלית",
+            "score": "65"
+          },
+          {
+            "name": "עברית",
+            "score": "70"
+          },
+          {
+            "name": "פיזיקה",
+            "score": null
+          },
+          {
+            "name": "כימיה",
+            "score": "68"
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": null
+          },
+          {
+            "name": "מחשבים",
+            "score": null
+          },
+          {
+            "name": "אזרחות",
+            "score": "62"
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": null
+          }
+        ],
+        "yomHamaaDate": "21.01.26"
+      }
     },
     {
       "id": "037691234",
@@ -2713,7 +3267,57 @@
         "grade": "י\"ב 3",
         "school": "תיכון יובל, פתח תקווה"
       },
-      "gender": "M"
+      "gender": "M",
+      "qualityData": {
+        "dapar": "80",
+        "interview": true,
+        "hebrewScore": "87",
+        "profile": "70",
+        "kahas": "58",
+        "yomHamaa": [
+          {
+            "name": "מתמטיקה",
+            "score": "82"
+          },
+          {
+            "name": "אנגלית",
+            "score": "86"
+          },
+          {
+            "name": "עברית",
+            "score": "78"
+          },
+          {
+            "name": "פיזיקה",
+            "score": "85"
+          },
+          {
+            "name": "כימיה",
+            "score": null
+          },
+          {
+            "name": "ביולוגיה",
+            "score": null
+          },
+          {
+            "name": "היסטוריה",
+            "score": "80"
+          },
+          {
+            "name": "מחשבים",
+            "score": null
+          },
+          {
+            "name": "אזרחות",
+            "score": null
+          },
+          {
+            "name": "גיאוגרפיה",
+            "score": "76"
+          }
+        ],
+        "yomHamaaDate": "10.04.26"
+      }
     }
   ],
   "searchResults": {
@@ -2808,9 +3412,9 @@
       "icon": "star"
     },
     {
-      "id": "dashboard",
-      "label": "דשבורד",
-      "route": "/dashboard",
+      "id": "permissions",
+      "label": "הרשאות",
+      "route": "/permissions",
       "icon": "grid"
     }
   ],

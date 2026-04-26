@@ -13,6 +13,8 @@ const store = useAppStore()
 const pageContent = ref(null)
 const showTestMenu = ref(false)
 const isIntro = computed(() => route.path === '/intro')
+const isRegistration = computed(() => route.path.startsWith('/registration'))
+const isNotFound = computed(() => route.path === '/not-found')
 
 function toggleTestMenu() {
   showTestMenu.value = !showTestMenu.value
@@ -27,7 +29,7 @@ watch(() => route.path, () => {
 <template>
   <div class="app-layout">
     <!-- mobile only -->
-    <MobileHeader v-if="!isIntro" />
+    <MobileHeader v-if="!isIntro && !isNotFound" />
 
     <!-- desktop only -->
     <AppSidebar />
@@ -50,7 +52,7 @@ watch(() => route.path, () => {
     </div>
 
     <!-- mobile only -->
-    <BottomNav v-if="!isIntro" />
+    <BottomNav v-if="!isIntro && !isRegistration && !isNotFound" />
     <InstallPrompt v-if="!isIntro" />
 
     <!-- Test toggle -->
@@ -61,6 +63,8 @@ watch(() => route.path, () => {
       <transition name="test-menu">
         <div v-if="showTestMenu" class="test-menu">
           <button class="test-menu-btn" @click="router.push('/intro'); showTestMenu = false">🏠 אינטרו</button>
+          <button class="test-menu-btn" @click="router.push('/registration'); showTestMenu = false">📝 הרשמה</button>
+          <button class="test-menu-btn" @click="router.push('/not-found'); showTestMenu = false">🐻 404</button>
           <button class="test-menu-btn" :class="{ 'test-menu-btn--active': store.showTestInfo }" @click="store.toggleTestInfo(); showTestMenu = false">🧪 מידע טסט</button>
         </div>
       </transition>
