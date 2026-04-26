@@ -59,7 +59,10 @@ function snapTo(frac) {
   drawerHeight.value = Math.round(getAvailableHeight() * frac)
 }
 
+const hasDetails = computed(() => !!candidate.personalDetails)
+
 function openDrawer() {
+  if (!hasDetails.value) return
   detailsOpen.value = true
   document.body.style.overflow = 'hidden'
   document.body.style.touchAction = 'none'
@@ -166,6 +169,7 @@ function onHeroTouchStart(e) {
 }
 
 function ensureDrawerOpen() {
+  if (!hasDetails.value) return
   if (!drawerShow.value) {
     detailsOpen.value = true
     document.body.style.overflow = 'hidden'
@@ -242,7 +246,7 @@ onMounted(() => {
     </div>
 
     <!-- Drawer drops down from behind hero -->
-    <div v-if="drawerShow" class="pd-drawer-wrap" :style="drawerStyle">
+    <div v-if="drawerShow && hasDetails" class="pd-drawer-wrap" :style="drawerStyle">
       <div class="pd-drawer">
         <div class="pd-scroll" :style="{ paddingTop: scrollPadTop }">
           <PersonalDetailsPanel

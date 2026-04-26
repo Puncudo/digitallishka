@@ -53,14 +53,6 @@ const TASK_ICONS = {
     <!-- ── Tab header ── -->
     <div class="tabs-header">
       <div class="tabs-row">
-        <button
-          class="tab-btn"
-          :class="{ active: activeTab === 'inv' }"
-          @click="store.setActiveTab('inv')"
-        >
-          <span class="tab-label">זימונים ({{ tasksTotal }})</span>
-          <div class="tab-bar" />
-        </button>
         <!-- First in DOM = rightmost in RTL -->
         <button
           class="tab-btn"
@@ -68,6 +60,14 @@ const TASK_ICONS = {
           @click="store.setActiveTab('tasks')"
         >
           <span class="tab-label">משימות ({{ tasksTotal }})</span>
+          <div class="tab-bar" />
+        </button>
+        <button
+          class="tab-btn"
+          :class="{ active: activeTab === 'inv' }"
+          @click="store.setActiveTab('inv')"
+        >
+          <span class="tab-label">זימונים ({{ tasksTotal }})</span>
           <div class="tab-bar" />
         </button>
         <button

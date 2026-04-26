@@ -1,9 +1,11 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import mockData from '@/data/mock.json'
 import BaseDrawer from '@/components/ui/BaseDrawer.vue'
 import AppIcon from '@/components/ui/AppIcon.vue'
 
+const router = useRouter()
 const admin = mockData.admin
 const schools = mockData.schools
 const selectedSchoolId = ref(schools[0].id)
@@ -358,13 +360,6 @@ const missionStudentCounts = computed(() => {
       <!-- School selector pills -->
       <div class="school-pills">
         <button
-          class="pill"
-          :class="{ active: isAll }"
-          @click="selectSchool('all')"
-        >
-          הכל
-        </button>
-        <button
           v-for="school in schools"
           :key="school.id"
           class="pill"
@@ -628,8 +623,8 @@ const missionStudentCounts = computed(() => {
 
           <!-- Mission cards -->
           <div class="mission-cards">
-            <div v-for="mission in currentMissionData.missions" :key="mission.id" class="mission-card">
-              <div class="mission-arrow" @click="openMissionDetail(mission)">
+            <div v-for="mission in currentMissionData.missions" :key="mission.id" class="mission-card" style="cursor:pointer" @click="openMissionDetail(mission)">
+              <div class="mission-arrow">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M8 2L4 6L8 10" stroke="#5D87FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -690,7 +685,7 @@ const missionStudentCounts = computed(() => {
               <div class="sl-card-content">
                 <div class="sl-card-top">
                   <div class="sl-name-row">
-                    <span class="sl-name">{{ student.name }}</span>
+                    <span class="sl-name" style="cursor:pointer" @click="router.push(`/candidates/${student.id}`)">{{ student.name }}</span>
                     <span class="sl-separator">|</span>
                     <span class="sl-id">ת.ז {{ student.idNumber }}</span>
                   </div>
@@ -1109,7 +1104,7 @@ const missionStudentCounts = computed(() => {
             </div>
             <div class="md-student-info">
               <div class="md-student-name-row">
-                <span class="md-student-name">{{ student.name }}</span>
+                <span class="md-student-name" style="cursor:pointer" @click="router.push(`/candidates/${student.id}`)">{{ student.name }}</span>
                 <svg v-if="student.hasAlert" class="md-student-alert" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M10 1.5L18.66 17H1.34L10 1.5Z" fill="#FF1D47"/>
                   <path d="M10 11V7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
