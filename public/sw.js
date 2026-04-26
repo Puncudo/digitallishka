@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2'
+const CACHE_VERSION = 'v3'
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -10,4 +10,6 @@ self.addEventListener('activate', (e) => {
   )
 })
 
-self.addEventListener('fetch', () => {})
+self.addEventListener('fetch', (e) => {
+  e.respondWith(fetch(e.request))
+})
