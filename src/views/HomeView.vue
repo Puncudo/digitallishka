@@ -90,6 +90,22 @@ function closeDrawer() {
   drawerOpen.value = false
 }
 
+// Delete confirmation
+const showDeleteConfirm = ref(false)
+
+function askDeleteRep() {
+  showDeleteConfirm.value = true
+}
+
+function confirmDeleteRep() {
+  showDeleteConfirm.value = false
+  closeDrawer()
+}
+
+function cancelDeleteRep() {
+  showDeleteConfirm.value = false
+}
+
 function padCount(n) {
   return String(n).padStart(2, '0')
 }
@@ -153,18 +169,18 @@ const filteredStudentsList = computed(() => {
 // Filter drawer
 const filterDrawerOpen = ref(false)
 const filterSelections = ref({
-  type: 'צו בצוותא',
-  dateFrom: 'הכל',
+  type: new Set(),
+  dateFrom: new Set(),
   dateTo: '',
-  grade: '',
-  malshabStatus: '',
+  grade: new Set(),
+  malshabStatus: new Set(),
   missions: new Set(),
-  missionStatus: ''
+  missionStatus: new Set()
 })
 
 const hasActiveFilters = computed(() => {
   const f = filterSelections.value
-  return f.type !== 'צו בצוותא' || f.dateFrom !== 'הכל' || f.dateTo || f.grade || f.malshabStatus || f.missions.size > 0 || f.missionStatus
+  return f.type.size > 0 || f.dateFrom.size > 0 || f.dateTo || f.grade.size > 0 || f.malshabStatus.size > 0 || f.missions.size > 0 || f.missionStatus.size > 0
 })
 
 function openFilterDrawer() {
@@ -177,25 +193,21 @@ function closeFilterDrawer() {
 
 function toggleFilterPill(section, value) {
   const f = filterSelections.value
-  if (section === 'missions') {
-    const s = new Set(f.missions)
-    if (s.has(value)) s.delete(value)
-    else s.add(value)
-    f.missions = s
-  } else {
-    f[section] = f[section] === value ? '' : value
-  }
+  const s = new Set(f[section])
+  if (s.has(value)) s.delete(value)
+  else s.add(value)
+  f[section] = s
 }
 
 function clearAllFilters() {
   filterSelections.value = {
-    type: 'צו בצוותא',
-    dateFrom: 'הכל',
+    type: new Set(),
+    dateFrom: new Set(),
     dateTo: '',
-    grade: '',
-    malshabStatus: '',
+    grade: new Set(),
+    malshabStatus: new Set(),
     missions: new Set(),
-    missionStatus: ''
+    missionStatus: new Set()
   }
 }
 
@@ -768,7 +780,8 @@ const missionStudentCounts = computed(() => {
             </div>
             <!-- Footer -->
             <div class="drawer-footer">
-              <button v-if="drawerMode === 'edit'" class="remove-btn" @click="closeDrawer">
+              <button class="save-btn" @click="closeDrawer">שמירה</button>
+              <button v-if="drawerMode === 'edit'" class="remove-btn" @click="askDeleteRep">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M17.5 4.98C14.78 4.71 12.05 4.57 9.33 4.57C7.5 4.57 5.67 4.66 3.84 4.85L2.5 4.98" stroke="#FF1D47" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M7.08 4.14L7.27 3.05C7.41 2.25 7.5 1.67 8.91 1.67H11.09C12.5 1.67 12.6 2.29 12.73 3.06L12.92 4.14" stroke="#FF1D47" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -776,9 +789,29 @@ const missionStudentCounts = computed(() => {
                 </svg>
                 <span>הסרת נציג</span>
               </button>
-              <button class="save-btn" @click="closeDrawer">שמירה</button>
             </div>
     </BaseDrawer>
+
+    <!-- Delete Confirmation -->
+    <Transition name="confirm-fade">
+      <div v-if="showDeleteConfirm" class="confirm-overlay" @click.self="cancelDeleteRep">
+        <div class="confirm-dialog">
+          <div class="confirm-icon">
+            <svg width="28" height="28" viewBox="0 0 20 20" fill="none">
+              <path d="M17.5 4.98C14.78 4.71 12.05 4.57 9.33 4.57C7.5 4.57 5.67 4.66 3.84 4.85L2.5 4.98" stroke="#FF1D47" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.08 4.14L7.27 3.05C7.41 2.25 7.5 1.67 8.91 1.67H11.09C12.5 1.67 12.6 2.29 12.73 3.06L12.92 4.14" stroke="#FF1D47" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15.71 7.62L15.17 16.11C15.07 17.38 14.99 18.33 12.66 18.33H7.34C5.01 18.33 4.93 17.38 4.83 16.11L4.29 7.62" stroke="#FF1D47" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="confirm-title">הסרת נציג</span>
+          <span class="confirm-text">להסיר את הנציג/ה "{{ drawerForm.name }}"?</span>
+          <div class="confirm-actions">
+            <button class="confirm-delete" @click="confirmDeleteRep">הסרה</button>
+            <button class="confirm-cancel" @click="cancelDeleteRep">ביטול</button>
+          </div>
+        </div>
+      </div>
+    </Transition>
 
     <!-- Filter Drawer -->
     <BaseDrawer v-model="filterDrawerOpen">
@@ -799,12 +832,12 @@ const missionStudentCounts = computed(() => {
                 <div class="filter-section-pills">
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.type === 'צו בצוותא' }"
+                    :class="{ active: filterSelections.type.has('צו בצוותא') }"
                     @click="toggleFilterPill('type', 'צו בצוותא')"
                   >צו בצוותא</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.type === 'עצמאים' }"
+                    :class="{ active: filterSelections.type.has('עצמאים') }"
                     @click="toggleFilterPill('type', 'עצמאים')"
                   >עצמאים</div>
                 </div>
@@ -816,17 +849,17 @@ const missionStudentCounts = computed(() => {
                 <div class="filter-section-pills">
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.dateFrom === 'הכל' }"
+                    :class="{ active: filterSelections.dateFrom.has('הכל') }"
                     @click="toggleFilterPill('dateFrom', 'הכל')"
                   >הכל</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.dateFrom === '14.04.26' }"
+                    :class="{ active: filterSelections.dateFrom.has('14.04.26') }"
                     @click="toggleFilterPill('dateFrom', '14.04.26')"
                   >14.04.26</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.dateFrom === '06.05.26' }"
+                    :class="{ active: filterSelections.dateFrom.has('06.05.26') }"
                     @click="toggleFilterPill('dateFrom', '06.05.26')"
                   >06.05.26</div>
                 </div>
@@ -838,27 +871,27 @@ const missionStudentCounts = computed(() => {
                 <div class="filter-section-pills">
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.grade === 'י״א 1' }"
+                    :class="{ active: filterSelections.grade.has('י״א 1') }"
                     @click="toggleFilterPill('grade', 'י״א 1')"
                   >י״א 1</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.grade === 'י״א 2' }"
+                    :class="{ active: filterSelections.grade.has('י״א 2') }"
                     @click="toggleFilterPill('grade', 'י״א 2')"
                   >י״א 2</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.grade === 'י״א 3' }"
+                    :class="{ active: filterSelections.grade.has('י״א 3') }"
                     @click="toggleFilterPill('grade', 'י״א 3')"
                   >י״א 3</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.grade === 'י״א 4' }"
+                    :class="{ active: filterSelections.grade.has('י״א 4') }"
                     @click="toggleFilterPill('grade', 'י״א 4')"
                   >י״א 4</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.grade === 'י״א 5' }"
+                    :class="{ active: filterSelections.grade.has('י״א 5') }"
                     @click="toggleFilterPill('grade', 'י״א 5')"
                   >י״א 5</div>
                 </div>
@@ -870,17 +903,17 @@ const missionStudentCounts = computed(() => {
                 <div class="filter-section-pills">
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.malshabStatus === 'סטטוס 0' }"
+                    :class="{ active: filterSelections.malshabStatus.has('סטטוס 0') }"
                     @click="toggleFilterPill('malshabStatus', 'סטטוס 0')"
                   >סטטוס 0</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.malshabStatus === 'סטטוס 1' }"
+                    :class="{ active: filterSelections.malshabStatus.has('סטטוס 1') }"
                     @click="toggleFilterPill('malshabStatus', 'סטטוס 1')"
                   >סטטוס 1</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.malshabStatus === 'סטטוס 2' }"
+                    :class="{ active: filterSelections.malshabStatus.has('סטטוס 2') }"
                     @click="toggleFilterPill('malshabStatus', 'סטטוס 2')"
                   >סטטוס 2</div>
                 </div>
@@ -906,17 +939,17 @@ const missionStudentCounts = computed(() => {
                 <div class="filter-section-pills">
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.missionStatus === 'בוצע' }"
+                    :class="{ active: filterSelections.missionStatus.has('בוצע') }"
                     @click="toggleFilterPill('missionStatus', 'בוצע')"
                   >בוצע</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.missionStatus === 'בתהליך' }"
+                    :class="{ active: filterSelections.missionStatus.has('בתהליך') }"
                     @click="toggleFilterPill('missionStatus', 'בתהליך')"
                   >בתהליך</div>
                   <div
                     class="filter-pill"
-                    :class="{ active: filterSelections.missionStatus === 'לא בוצע' }"
+                    :class="{ active: filterSelections.missionStatus.has('לא בוצע') }"
                     @click="toggleFilterPill('missionStatus', 'לא בוצע')"
                   >לא בוצע</div>
                 </div>
@@ -925,8 +958,8 @@ const missionStudentCounts = computed(() => {
 
             <!-- Footer -->
             <div class="filter-footer">
-              <button class="filter-clear-btn" @click="clearAllFilters">ניקוי</button>
               <button class="filter-apply-btn" @click="closeFilterDrawer">הצגת תוצאות</button>
+              <button class="filter-clear-btn" @click="clearAllFilters">ניקוי</button>
             </div>
     </BaseDrawer>
 
@@ -3055,6 +3088,7 @@ const missionStudentCounts = computed(() => {
   flex-direction: column;
   align-items: center;
   padding: 20px 30px;
+  padding-bottom: calc(var(--bottom-nav-h, 60px) + 20px);
   gap: 4px;
   overflow-y: auto;
   flex: 1;
@@ -3160,4 +3194,85 @@ const missionStudentCounts = computed(() => {
 .slide-leave-to {
   transform: translateX(-100%);
 }
+
+/* ═══ Delete Confirmation Dialog ═══ */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.confirm-dialog {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px 20px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+.confirm-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #FFF0F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.confirm-title {
+  font-family: 'Noto Sans Hebrew', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2F305C;
+}
+.confirm-text {
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6D6E8D;
+  text-align: center;
+  line-height: 1.5;
+}
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  width: 100%;
+}
+.confirm-cancel {
+  flex: 1;
+  padding: 10px;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 8px;
+  background: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2F305C;
+  cursor: pointer;
+}
+.confirm-delete {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #FF1D47;
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+.confirm-fade-enter-active { transition: opacity 0.2s; }
+.confirm-fade-leave-active { transition: opacity 0.15s; }
+.confirm-fade-enter-from, .confirm-fade-leave-to { opacity: 0; }
+.confirm-fade-enter-active .confirm-dialog { transition: transform 0.2s ease; }
+.confirm-fade-enter-from .confirm-dialog { transform: scale(0.95); }
 </style>

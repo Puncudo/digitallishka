@@ -8,5 +8,6 @@ createApp(App).use(createPinia()).use(router).mount('#app')
 
 // Register service worker for PWA
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/digitallishka/sw.js').catch(() => {})
+  const base = import.meta.env.BASE_URL || '/'
+  navigator.serviceWorker.register(base + 'sw.js').catch(() => {})
 }
