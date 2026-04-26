@@ -1,3 +1,7 @@
+<script>
+export default { name: 'HomeView' }
+</script>
+
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
