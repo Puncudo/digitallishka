@@ -255,6 +255,7 @@ function replay() {
 }
 
 onMounted(() => {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#4cc7ec')
   document.fonts.ready.then(() => {
     fontsReady.value = true
   })
@@ -262,6 +263,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#1e3a8a')
   destroyed = true
   gen++
 })
