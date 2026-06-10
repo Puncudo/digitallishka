@@ -13,13 +13,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 const routes = [
   {
     path: '/',
-    redirect: () => {
-      const seen = localStorage.getItem('intro_seen')
-      if (seen && Date.now() - Number(seen) < 24 * 60 * 60 * 1000) {
-        return '/home'
-      }
-      return '/intro'
-    }
+    redirect: '/home'
   },
   { path: '/intro',               component: IntroView },
   { path: '/home',                component: HomeView },
